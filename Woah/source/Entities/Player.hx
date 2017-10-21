@@ -20,10 +20,13 @@ enum Estados
 class Player extends FlxSprite 
 {
 	public var actionState(get, null):Estados;
+	private var vida:Int;
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
 		actionState = IDLE;
+		vida = 100;
+		
 	}
 	
 	override public function update(elapsed:Float):Void 

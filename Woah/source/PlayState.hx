@@ -5,6 +5,7 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.text.FlxText;
+import flixel.ui.FlxBar;
 
 class PlayState extends FlxState
 
@@ -27,6 +28,7 @@ class PlayState extends FlxState
 		add(player);
 		add(plati);
 		add(testito);
+		add( new FlxBar((FlxG.camera.scroll.x),(FlxG.camera.scroll.x),300,20,player,"vida",0,100,true));
 	}
 
 	override public function update(elapsed:Float):Void
