@@ -2,7 +2,6 @@ package entities;
 
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
-import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxG;
 import flixel.FlxObject;
 
@@ -25,7 +24,7 @@ class Player extends FlxSprite
 	{
 		super(X, Y, SimpleGraphic);
 		actionState = IDLE;
-		vida = 100;
+		vida = 1000;
 		
 	}
 	
@@ -113,6 +112,7 @@ class Player extends FlxSprite
 	{
 		if (FlxG.keys.justPressed.SPACE)
 		{
+			vida -= 10;
 			velocity.y -= 350;
 		}
 	}
