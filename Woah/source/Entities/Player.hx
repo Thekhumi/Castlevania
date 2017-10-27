@@ -71,16 +71,14 @@ class Player extends FlxSprite
 			{
 				actionState = Estados.IDLE;
 			}
+			//JUMP
 			case Estados.JUMP:
 			if (velocity.y == 0)
 			{
-				if (velocity.x == 0)
-				{
-					actionState = Estados.IDLE;
-				}
-				else
-				actionState = Estados.RUN;
+				
+				actionState = Estados.FALLING;
 			}
+			//FALLING
 			case Estados.FALLING:
 			if (velocity.y == 0)
 			{
@@ -91,6 +89,7 @@ class Player extends FlxSprite
 				else
 				actionState = Estados.RUN;
 			}
+			//ATTACK
 			case Estados.ATTACK:
 		}
 	}
