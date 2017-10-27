@@ -19,19 +19,19 @@ enum Estados
 class Player extends FlxSprite 
 {
 	public var actionState(get, null):Estados;
-	private var vida:Int;
+	private var vida:Float;
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
 		actionState = IDLE;
-		vida = 1000;
+		vida = Reg.playerVidaMax;
 		
 	}
 	
 	override public function update(elapsed:Float):Void 
 	{
 		checkEstados();
-		acceleration.y = 750;
+		acceleration.y = Reg.gravedad; 
 		super.update(elapsed);
 	}
 	
@@ -63,9 +63,13 @@ class Player extends FlxSprite
 			case Estados.RUN:
 			movimiento();
 			salto();
-			if (velocity.y != 0)
+			if (velocity.y < 0)
 			{
 				actionState = Estados.JUMP;
+			}
+			else if (velocity.y > 0)
+			{
+				actionState = Estados.FALLING;
 			}
 			else if (velocity.x == 0)
 			{

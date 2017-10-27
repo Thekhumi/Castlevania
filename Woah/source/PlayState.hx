@@ -1,5 +1,6 @@
 package;
 
+import entities.EnemySkeleton;
 import entities.Player;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -10,12 +11,14 @@ class PlayState extends FlxState
 
 {
 	private var player:Player;
+	private var enemy:EnemySkeleton;
 	private var plati:FlxSprite;
 	private var testito:FlxText;
 	private var interfaz:Interfaz;
 	override public function create():Void
 	{
-		player = new Player(350,300);
+		player = new Player(350, 300);
+		enemy = new EnemySkeleton(400, 300);
 		player.makeGraphic(32, 32, 0xFF000000);
 		FlxG.camera.bgColor = 0xFFCC4466;
 		
@@ -27,6 +30,7 @@ class PlayState extends FlxState
 		
 		super.create();
 		add(player);
+		add(enemy);
 		add(plati);
 		add(testito);
 		add(interfaz);
