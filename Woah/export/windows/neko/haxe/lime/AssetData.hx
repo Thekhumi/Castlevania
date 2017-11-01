@@ -18,8 +18,24 @@ class AssetData {
 			
 			path.set ("assets/data/data-goes-here.txt", "assets/data/data-goes-here.txt");
 			type.set ("assets/data/data-goes-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/Woah.oep", "assets/data/Woah.oep");
+			type.set ("assets/data/Woah.oep", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/WoahLevel.oel", "assets/data/WoahLevel.oel");
+			type.set ("assets/data/WoahLevel.oel", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/images/C Atack.png", "assets/images/C Atack.png");
+			type.set ("assets/images/C Atack.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/C Damage.png", "assets/images/C Damage.png");
+			type.set ("assets/images/C Damage.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/C Jump.png", "assets/images/C Jump.png");
+			type.set ("assets/images/C Jump.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/C Stand.png", "assets/images/C Stand.png");
+			type.set ("assets/images/C Stand.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/C Walk.png", "assets/images/C Walk.png");
+			type.set ("assets/images/C Walk.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");
 			type.set ("assets/images/images-go-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/images/TilesPetes.png", "assets/images/TilesPetes.png");
+			type.set ("assets/images/TilesPetes.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/music/music-goes-here.txt", "assets/music/music-goes-here.txt");
 			type.set ("assets/music/music-goes-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/sounds/sounds-go-here.txt", "assets/sounds/sounds-go-here.txt");

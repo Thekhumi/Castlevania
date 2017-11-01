@@ -33,6 +33,7 @@ class Player extends FlxSprite
 		checkEstados();
 		acceleration.y = Reg.gravedad; 
 		super.update(elapsed);
+		vida -= 1;
 	}
 	
 	private function checkEstados():Void

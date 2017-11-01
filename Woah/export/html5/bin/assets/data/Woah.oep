@@ -16,7 +16,7 @@
     <Width>5120</Width>
     <Height>1200</Height>
   </LevelMaximumSize>
-  <Filename>C:\Users\822\Desktop\Castlevania\Woah\assets\data\Woah.oep</Filename>
+  <Filename>C:\Users\822\Desktop\Woah.oep</Filename>
   <AngleMode>Radians</AngleMode>
   <CameraEnabled>true</CameraEnabled>
   <CameraSize>
@@ -42,7 +42,7 @@
   <Tilesets>
     <Tileset>
       <Name>NewTileset0</Name>
-      <FilePath>..\..\..\..\TilesPetes.png</FilePath>
+      <FilePath>New Piskel.png</FilePath>
       <TileSize>
         <Width>32</Width>
         <Height>32</Height>
