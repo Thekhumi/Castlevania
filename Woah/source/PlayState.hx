@@ -33,12 +33,13 @@ class PlayState extends FlxState
 		tilemap.setTileProperties(3, FlxObject.ANY);
 		
 		player = new Player(0, 0);
-		enemy = new EnemySkeleton(400, 300);
-		interfaz = new Interfaz(player, this);
+		enemy = new EnemySkeleton(400, 0, player);
+		
 		
 		add(tilemap);
 		add(player);
 		add(enemy);
+		interfaz = new Interfaz(player, this);
 		add(interfaz);
 	}
 
@@ -46,6 +47,7 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 		FlxG.collide(player, tilemap);
+		FlxG.collide(enemy, tilemap);
 		if (FlxG.keys.pressed.LEFT) 
 		{
 			FlxG.camera.scroll.x -= 10;
@@ -63,12 +65,11 @@ class PlayState extends FlxState
 			FlxG.camera.scroll.y+= 10;
 		}
 		
-		
 		if (FlxG.overlap(player, enemy))
 		{
 			player.recibirDanio(enemy.danio,enemy.x);
-			
 		}
-		testito.text = player.actionState.getName();
+		
+		
 	}
 }
