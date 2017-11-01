@@ -42,6 +42,12 @@ class PlayState extends FlxState
 		
 		FlxG.collide(plati, player);
 		FlxG.collide(plati, enemy);
+		
+		if (FlxG.overlap(player, enemy))
+		{
+			player.recibirDanio(enemy.danio,enemy.x);
+			
+		}
 		testito.text = player.actionState.getName();
 	}
 }

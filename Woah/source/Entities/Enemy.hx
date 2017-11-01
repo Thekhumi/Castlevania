@@ -19,6 +19,7 @@ class Enemy extends FlxSprite
 	private var vida:Float;
 	private var actionState(get, null):EstadosEnemy;
 	private var playerRef:Player;
+	public var danio:Int;
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset,player:Player) 
 	{
 		super(X, Y, SimpleGraphic);

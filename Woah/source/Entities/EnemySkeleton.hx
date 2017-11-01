@@ -12,6 +12,7 @@ class EnemySkeleton extends Enemy
 	{
 		super(X, Y, SimpleGraphic,playerRef);
 		makeGraphic(32, 32, FlxColor.YELLOW);
+		danio = 75;
 	}
 	
 	override public function update(elapsed:Float):Void 
@@ -73,4 +74,5 @@ class EnemySkeleton extends Enemy
 		}
 		else return false;
 	}
+	
 }

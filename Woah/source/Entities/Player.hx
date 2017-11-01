@@ -111,6 +111,18 @@ class Player extends FlxSprite
 		}
 	}
 	
+	public function recibirDanio(?cantidad:Int, ?xFuente:Float):Void
+	{
+		vida -= cantidad;
+		
+		if (this.x > xFuente)
+		{
+			x +=  25;
+		}
+		else x -= 25;
+
+	}
+	
 	private function salto():Void
 	{
 		if (FlxG.keys.justPressed.SPACE)
