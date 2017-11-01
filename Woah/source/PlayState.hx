@@ -18,7 +18,7 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		player = new Player(350, 300);
-		enemy = new EnemySkeleton(400, 300);
+		enemy = new EnemySkeleton(400, 300,player);
 		player.makeGraphic(32, 32, 0xFF000000);
 		FlxG.camera.bgColor = 0xFFCC4466;
 		
@@ -41,6 +41,7 @@ class PlayState extends FlxState
 		super.update(elapsed);
 		
 		FlxG.collide(plati, player);
+		FlxG.collide(plati, enemy);
 		testito.text = player.actionState.getName();
 	}
 }

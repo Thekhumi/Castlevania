@@ -3,6 +3,7 @@ package entities;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxG;
+import entities.Player;
 
 enum EstadosEnemy
 {
@@ -17,35 +18,21 @@ class Enemy extends FlxSprite
 {
 	private var vida:Float;
 	private var actionState(get, null):EstadosEnemy;
-	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
+	private var playerRef:Player;
+	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset,player:Player) 
 	{
 		super(X, Y, SimpleGraphic);
 		actionState = IDLE;
 		vida = Reg.enemyVidaBase;
+		playerRef = player;
 	}
 	
 	override public function update(elapsed:Float):Void 
 	{
-		checkEstados();
+		acceleration.y = Reg.gravedad;
 		super.update(elapsed);
 	}
 	
-	function checkEstados() 
-	{
-		switch(actionState)
-		{
-		//IDLE
-		case EstadosEnemy.IDLE:
-		//RUN
-		case EstadosEnemy.RUN:
-		//JUMP
-		case EstadosEnemy.JUMP:
-		//FALLING
-		case EstadosEnemy.FALLING:
-		//ATTACK
-		case EstadosEnemy.ATTACK:
-		}
-	}
 	
 	function get_actionState():EstadosEnemy 
 	{
