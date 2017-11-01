@@ -6,6 +6,9 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.text.FlxText;
+import flixel.addons.editors.ogmo.FlxOgmoLoader;
+import flixel.tile.FlxTilemap;
+import flixel.FlxObject;
 
 class PlayState extends FlxState
 
@@ -13,34 +16,50 @@ class PlayState extends FlxState
 	private var player:Player;
 	private var enemy:EnemySkeleton;
 	private var plati:FlxSprite;
-	private var testito:FlxText;
+	private var tilemap:FlxTilemap;
 	private var interfaz:Interfaz;
 	override public function create():Void
 	{
-		player = new Player(350, 300);
-		enemy = new EnemySkeleton(400, 300);
-		player.makeGraphic(32, 32, 0xFF000000);
-		FlxG.camera.bgColor = 0xFFCC4466;
-		
-		interfaz = new Interfaz(player, this);
-		testito = new FlxText(16, 16, 0, "", 24);
-		plati = new FlxSprite(100, 350);
-		plati.makeGraphic(440, 32);
-		plati.immovable = true;
-		
 		super.create();
+		
+		FlxG.mouse.visible = false;
+		FlxG.camera.bgColor = 0xFF000000;
+		
+		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.WoahLevel__oel);
+		tilemap = loader.loadTilemap(AssetPaths.TilesPetes__png, 32, 32, "NewLayer0"); 
+		tilemap.setTileProperties(0, FlxObject.NONE);
+		tilemap.setTileProperties(1, FlxObject.ANY);
+		tilemap.setTileProperties(2, FlxObject.NONE);
+		tilemap.setTileProperties(3, FlxObject.ANY);
+		
+		player = new Player(0, 0);
+		enemy = new EnemySkeleton(400, 300);
+		interfaz = new Interfaz(player, this);
+		
+		add(tilemap);
 		add(player);
 		add(enemy);
-		add(plati);
-		add(testito);
 		add(interfaz);
 	}
 
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		
-		FlxG.collide(plati, player);
-		testito.text = player.actionState.getName();
+		if (FlxG.keys.pressed.LEFT) 
+		{
+			FlxG.camera.scroll.x -= 10;
+		}
+		if (FlxG.keys.pressed.RIGHT) 
+		{
+			FlxG.camera.scroll.x+= 10;
+		}
+		if (FlxG.keys.pressed.UP) 
+		{
+			FlxG.camera.scroll.y -= 10;
+		}
+		if (FlxG.keys.pressed.DOWN) 
+		{
+			FlxG.camera.scroll.y+= 10;
+		}
 	}
 }
