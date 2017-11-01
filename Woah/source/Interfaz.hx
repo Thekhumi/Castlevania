@@ -32,6 +32,8 @@ class Interfaz extends FlxBasic
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
+		barraVida.x = FlxG.camera.scroll.x;
+		barraVida.y = FlxG.camera.scroll.y;
 		testito.text = player.actionState.getName();
 	}
 	
