@@ -2,6 +2,7 @@ package;
 
 import entities.EnemySkeleton;
 import entities.Player;
+import entities.WoahHitbox;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.FlxG;
@@ -18,6 +19,7 @@ class PlayState extends FlxState
 	private var plati:FlxSprite;
 	private var tilemap:FlxTilemap;
 	private var interfaz:Interfaz;
+	private var hit:WoahHitbox;
 	override public function create():Void
 	{
 		super.create();
@@ -36,10 +38,16 @@ class PlayState extends FlxState
 		player = new Player(0, 0);
 		player.width = 32;
 		player.height = 64;
-		player.offset.x = -5;
+		player.offset.x = 28;
 		player.offset.y = -7;
 		
+		hit = new WoahHitbox(player.x + 10, player.y + 10);
+		
 		enemy = new EnemySkeleton(400, 0, player);
+		enemy.width = 30;
+		enemy.height = 56;
+		enemy.offset.x = 0;
+		enemy.offset.y = -7;
 		
 		add(tilemap);
 		add(player);
@@ -58,9 +66,8 @@ class PlayState extends FlxState
 		
 		if (FlxG.overlap(player, enemy))
 		{
-			player.recibirDanio(enemy.danio,enemy.x);
+			player.recibirDanio(enemy.danio, enemy.x);
+			enemy.kill();
 		}
-		
-		
 	}
 }
