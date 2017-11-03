@@ -31,16 +31,23 @@ class PlayState extends FlxState
 		tilemap.setTileProperties(1, FlxObject.ANY);
 		tilemap.setTileProperties(2, FlxObject.NONE);
 		tilemap.setTileProperties(3, FlxObject.ANY);
+		FlxG.worldBounds.set(0, 0, 5120, 1200);
 		
 		player = new Player(0, 0);
-		enemy = new EnemySkeleton(400, 0, player);
+		player.width = 32;
+		player.height = 64;
+		player.offset.x = -5;
+		player.offset.y = -7;
 		
+		enemy = new EnemySkeleton(400, 0, player);
 		
 		add(tilemap);
 		add(player);
 		add(enemy);
 		interfaz = new Interfaz(player, this);
 		add(interfaz);
+		
+		FlxG.camera.follow(player);
 	}
 
 	override public function update(elapsed:Float):Void
@@ -48,22 +55,6 @@ class PlayState extends FlxState
 		super.update(elapsed);
 		FlxG.collide(player, tilemap);
 		FlxG.collide(enemy, tilemap);
-		if (FlxG.keys.pressed.LEFT) 
-		{
-			FlxG.camera.scroll.x -= 10;
-		}
-		if (FlxG.keys.pressed.RIGHT) 
-		{
-			FlxG.camera.scroll.x+= 10;
-		}
-		if (FlxG.keys.pressed.UP) 
-		{
-			FlxG.camera.scroll.y -= 10;
-		}
-		if (FlxG.keys.pressed.DOWN) 
-		{
-			FlxG.camera.scroll.y+= 10;
-		}
 		
 		if (FlxG.overlap(player, enemy))
 		{

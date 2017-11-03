@@ -22,10 +22,14 @@ class Interfaz extends FlxBasic
 		
 		barraVida = new FlxBar(FlxG.camera.scroll.x, FlxG.camera.scroll.y, 300, 20, player, "vida", 0, 1000, true);
 		barraVida.createColoredEmptyBar(0xFF000000, true, 0xFFFF0000);
-		barraVida.createColoredFilledBar(0xFFFF0000,false);
+		barraVida.createColoredFilledBar(0xFFFF0000, false);
+		barraVida.scrollFactor.x = 0;
+		barraVida.scrollFactor.y = 0;
 		estado.add(barraVida);
 		
 		testito = new FlxText(16, 16, 0, "", 24);
+		testito.scrollFactor.x = 0;
+		testito.scrollFactor.y = 0;
 		estado.add(testito);
 	}
 	

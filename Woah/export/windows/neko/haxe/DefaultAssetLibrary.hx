@@ -66,10 +66,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
-		
-		
-		
-		
 		Font.registerFont (__ASSET__flixel_fonts_nokiafc22_ttf);
 		Font.registerFont (__ASSET__flixel_fonts_monsterrat_ttf);
 		
@@ -79,10 +75,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
-		useManifest = true;
-		useManifest = true;
-		useManifest = true;
-		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -602,10 +594,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
-		
-		
-		
-		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_monsterrat_ttf);
 		
@@ -621,16 +609,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/Woah.oep", AssetType.TEXT);
 		path.set ("assets/data/WoahLevel.oel", "assets/data/WoahLevel.oel");
 		type.set ("assets/data/WoahLevel.oel", AssetType.TEXT);
-		path.set ("assets/images/C Atack.png", "assets/images/C Atack.png");
-		type.set ("assets/images/C Atack.png", AssetType.IMAGE);
-		path.set ("assets/images/C Damage.png", "assets/images/C Damage.png");
-		type.set ("assets/images/C Damage.png", AssetType.IMAGE);
-		path.set ("assets/images/C Jump.png", "assets/images/C Jump.png");
-		type.set ("assets/images/C Jump.png", AssetType.IMAGE);
-		path.set ("assets/images/C Stand.png", "assets/images/C Stand.png");
-		type.set ("assets/images/C Stand.png", AssetType.IMAGE);
-		path.set ("assets/images/C Walk.png", "assets/images/C Walk.png");
-		type.set ("assets/images/C Walk.png", AssetType.IMAGE);
+		path.set ("assets/images/CFULLclone.png", "assets/images/CFULLclone.png");
+		type.set ("assets/images/CFULLclone.png", AssetType.IMAGE);
 		path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");
 		type.set ("assets/images/images-go-here.txt", AssetType.TEXT);
 		path.set ("assets/images/TilesPetes.png", "assets/images/TilesPetes.png");
@@ -665,19 +645,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/data/WoahLevel.oel";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
-		id = "assets/images/C Atack.png";
-		path.set (id, id);
-		type.set (id, AssetType.IMAGE);
-		id = "assets/images/C Damage.png";
-		path.set (id, id);
-		type.set (id, AssetType.IMAGE);
-		id = "assets/images/C Jump.png";
-		path.set (id, id);
-		type.set (id, AssetType.IMAGE);
-		id = "assets/images/C Stand.png";
-		path.set (id, id);
-		type.set (id, AssetType.IMAGE);
-		id = "assets/images/C Walk.png";
+		id = "assets/images/CFULLclone.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
 		id = "assets/images/images-go-here.txt";
@@ -733,10 +701,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
-		useManifest = true;
-		useManifest = true;
-		useManifest = true;
-		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -1489,10 +1453,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
-
-
-
-
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends null { }
@@ -1502,10 +1462,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
-
-
-
-
 
 
 

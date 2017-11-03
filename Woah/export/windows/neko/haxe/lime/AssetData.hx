@@ -22,16 +22,8 @@ class AssetData {
 			type.set ("assets/data/Woah.oep", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/data/WoahLevel.oel", "assets/data/WoahLevel.oel");
 			type.set ("assets/data/WoahLevel.oel", Reflect.field (AssetType, "text".toUpperCase ()));
-			path.set ("assets/images/C Atack.png", "assets/images/C Atack.png");
-			type.set ("assets/images/C Atack.png", Reflect.field (AssetType, "image".toUpperCase ()));
-			path.set ("assets/images/C Damage.png", "assets/images/C Damage.png");
-			type.set ("assets/images/C Damage.png", Reflect.field (AssetType, "image".toUpperCase ()));
-			path.set ("assets/images/C Jump.png", "assets/images/C Jump.png");
-			type.set ("assets/images/C Jump.png", Reflect.field (AssetType, "image".toUpperCase ()));
-			path.set ("assets/images/C Stand.png", "assets/images/C Stand.png");
-			type.set ("assets/images/C Stand.png", Reflect.field (AssetType, "image".toUpperCase ()));
-			path.set ("assets/images/C Walk.png", "assets/images/C Walk.png");
-			type.set ("assets/images/C Walk.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/CFULLclone.png", "assets/images/CFULLclone.png");
+			type.set ("assets/images/CFULLclone.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");
 			type.set ("assets/images/images-go-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/images/TilesPetes.png", "assets/images/TilesPetes.png");
