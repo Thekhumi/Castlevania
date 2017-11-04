@@ -30,8 +30,16 @@ class AssetData {
 			type.set ("assets/images/CFULLclone.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/clone.png", "assets/images/clone.png");
 			type.set ("assets/images/clone.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/escopeta.png", "assets/images/escopeta.png");
+			type.set ("assets/images/escopeta.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");
 			type.set ("assets/images/images-go-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/images/metralleta.png", "assets/images/metralleta.png");
+			type.set ("assets/images/metralleta.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/nada.png", "assets/images/nada.png");
+			type.set ("assets/images/nada.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/pistola.png", "assets/images/pistola.png");
+			type.set ("assets/images/pistola.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/skeleton.png", "assets/images/skeleton.png");
 			type.set ("assets/images/skeleton.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/TilesPetes.png", "assets/images/TilesPetes.png");

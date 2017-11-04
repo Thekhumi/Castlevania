@@ -6,6 +6,7 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxG;
 import flixel.FlxObject;
 import entities.WoahHitbox;
+import entities.Item;
 
 enum Estados
 {
@@ -23,6 +24,8 @@ class Player extends FlxSprite
 	public var atacc:FlxSprite;
 	public var actionState(get, null):Estados;
 	private var vida:Float;
+	private var mun:Int;
+	private var arma:Tipo;
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
@@ -43,7 +46,8 @@ class Player extends FlxSprite
 		
 		actionState = IDLE;
 		vida = Reg.playerVidaMax;
-		
+		mun = 0;
+		arma = NADA;
 		
 	}
 	
@@ -185,5 +189,22 @@ class Player extends FlxSprite
 	function get_actionState():Estados 
 	{
 		return actionState;
+	}
+	
+	public function addMun(cant:Int):Void
+	{
+		mun += cant;
+	}
+	public function getMun():Int
+	{
+		return mun;
+	}
+	public function setArma(tipo:Tipo):Void
+	{
+		arma = tipo;
+	}
+	public function getArma():Tipo
+	{
+		return arma;
 	}
 }
