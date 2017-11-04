@@ -21,7 +21,7 @@ class Interfaz extends FlxBasic
 	{
 		super();
 		player = jugador;
-		
+		 
 		barraVida = new FlxBar(FlxG.camera.scroll.x, FlxG.camera.scroll.y, 300, 20, player, "vida", 0, 1000, true);
 		barraVida.createColoredEmptyBar(0xFF000000, true, 0xFFFF0000);
 		barraVida.createColoredFilledBar(0xFFFF0000, false);
@@ -47,7 +47,7 @@ class Interfaz extends FlxBasic
 		super.update(elapsed);
 		testito.text = player.actionState.getName();
 		updateArma();
-		municion.text = Std.string(player.getMun());
+		municion.text = "Ammo: " + Std.string(player.getMun());
 		
 	}
 	private function updateArma():Void
