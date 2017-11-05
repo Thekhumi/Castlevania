@@ -21,31 +21,30 @@ class Interfaz extends FlxBasic
 	{
 		super();
 		player = jugador;
-		 
-		barraVida = new FlxBar(FlxG.camera.scroll.x, FlxG.camera.scroll.y, 300, 20, player, "vida", 0, 1000, true);
+		
+		barraVida = new FlxBar(FlxG.camera.scroll.x, FlxG.camera.scroll.y, 150, 10, player, "vida", 0, 1000, true);
 		barraVida.createColoredEmptyBar(0xFF000000, true, 0xFFFF0000);
 		barraVida.createColoredFilledBar(0xFFFF0000, false);
 		barraVida.scrollFactor.set(0,0);
 		estado.add(barraVida);
 		
-		arma = new FlxSprite(barraVida.x+ 8, barraVida.y + 30, AssetPaths.nada__png);
-		arma.scale.set(2,2);
+		arma = new FlxSprite(barraVida.x, barraVida.y + 15, AssetPaths.nada__png);
 		arma.scrollFactor.set(0, 0);
 		estado.add(arma);
 		
-		municion = new FlxText(arma.x + arma.width + 8, arma.y, 0, "", 24);
+		municion = new FlxText(arma.x + arma.width + 8, arma.y, 0, "", 12);
 		municion.scrollFactor.set(0, 0);
 		estado.add(municion);
 		
-		testito = new FlxText(16, 16, 0, "", 24);
-		testito.scrollFactor.set(0, 0);
+		//testito = new FlxText(16, 16, 0, "", 24);
+		//testito.scrollFactor.set(0, 0);
 		//estado.add(testito);
 	}
 	
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		testito.text = player.actionState.getName();
+		//testito.text = player.actionState.getName();
 		updateArma();
 		municion.text = "Ammo: " + Std.string(player.getMun());
 		

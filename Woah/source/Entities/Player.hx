@@ -186,7 +186,7 @@ class Player extends FlxSprite
 	{
 		actionState = Estados.CLIMB;
 		if (FlxG.keys.pressed.UP)
-			this.y += -5;
+			this.y -= 5;
 		if (FlxG.keys.pressed.DOWN)
 			this.y += 5;
 	}
