@@ -16,14 +16,20 @@ class AssetData {
 		
 		if (!initialized) {
 			
-			path.set ("assets/data/data-goes-here.txt", "assets/data/data-goes-here.txt");
-			type.set ("assets/data/data-goes-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
-			path.set ("assets/data/Woah.oep", "assets/data/Woah.oep");
-			type.set ("assets/data/Woah.oep", Reflect.field (AssetType, "text".toUpperCase ()));
-			path.set ("assets/data/WoahLevel.oel", "assets/data/WoahLevel.oel");
-			type.set ("assets/data/WoahLevel.oel", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/levelv3.oel", "assets/data/levelv3.oel");
+			type.set ("assets/data/levelv3.oel", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/NewTileset.png", "assets/data/NewTileset.png");
+			type.set ("assets/data/NewTileset.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/data/ObstaCulos.png", "assets/data/ObstaCulos.png");
+			type.set ("assets/data/ObstaCulos.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/data/tilesC.png", "assets/data/tilesC.png");
+			type.set ("assets/data/tilesC.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/data/woahLevel.oep", "assets/data/woahLevel.oep");
+			type.set ("assets/data/woahLevel.oep", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/images/atacc.png", "assets/images/atacc.png");
 			type.set ("assets/images/atacc.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/balas.png", "assets/images/balas.png");
+			type.set ("assets/images/balas.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/C Damage.png", "assets/images/C Damage.png");
 			type.set ("assets/images/C Damage.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/CFULLclone.png", "assets/images/CFULLclone.png");

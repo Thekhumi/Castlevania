@@ -36,7 +36,7 @@ class Player extends FlxSprite
 		setFacingFlip(FlxObject.LEFT, true, false);
 		
 		animation.add("idle", [0, 1, 2], 8, true);
-		animation.add("run", [3, 4, 5, 6], 8, true);
+		animation.add("run", [4, 5, 6, 3], 8, true);
 		animation.add("jump", [7, 8], 8, false);
 		animation.add("fall", [9], 8, false);
 		animation.add("atacc", [10, 11, 12, 13, 14, 15, 16, 17], 12, false);
@@ -177,7 +177,17 @@ class Player extends FlxSprite
 			x +=  25;
 		}
 		else x -= 25;
-
+	}
+	public function fueguin():Void
+	{
+		actionState = Estados.DAMAGE;
+		vida -= 75;
+	}
+	
+	public function trepar():Void
+	{
+		actionState = Estados.CLIMB;
+		this.y += -5;
 	}
 	
 	private function salto():Void
