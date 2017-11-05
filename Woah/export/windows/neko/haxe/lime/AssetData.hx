@@ -30,6 +30,8 @@ class AssetData {
 			type.set ("assets/images/atacc.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/balas.png", "assets/images/balas.png");
 			type.set ("assets/images/balas.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/bat.png", "assets/images/bat.png");
+			type.set ("assets/images/bat.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/C Damage.png", "assets/images/C Damage.png");
 			type.set ("assets/images/C Damage.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/CFULLclone.png", "assets/images/CFULLclone.png");

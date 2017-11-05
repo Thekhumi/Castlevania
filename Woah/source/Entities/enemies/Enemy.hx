@@ -1,4 +1,4 @@
-package entities;
+package entities.enemies;
 
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
@@ -20,7 +20,7 @@ class Enemy extends FlxSprite
 	private var actionState(get, null):EstadosEnemy;
 	private var playerRef:Player;
 	public var danio:Int;
-	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset,player:Player) 
+	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset, player:Player) 
 	{
 		super(X, Y, SimpleGraphic);
 		actionState = IDLE;

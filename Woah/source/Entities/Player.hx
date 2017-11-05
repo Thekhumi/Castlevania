@@ -5,7 +5,6 @@ import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxG;
 import flixel.FlxObject;
-import entities.WoahHitbox;
 import entities.Item;
 
 enum Estados
@@ -30,7 +29,6 @@ class Player extends FlxSprite
 	{
 		super(X, Y, SimpleGraphic);
 		loadGraphic(AssetPaths.clone__png, true, 92, 38);
-		scale.set(2, 2);
 		updateHitbox();
 		setFacingFlip(FlxObject.RIGHT, false, false);
 		setFacingFlip(FlxObject.LEFT, true, false);
@@ -187,7 +185,10 @@ class Player extends FlxSprite
 	public function trepar():Void
 	{
 		actionState = Estados.CLIMB;
-		this.y += -5;
+		if (FlxG.keys.pressed.UP)
+			this.y += -5;
+		if (FlxG.keys.pressed.DOWN)
+			this.y += 5;
 	}
 	
 	private function salto():Void

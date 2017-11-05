@@ -1,6 +1,6 @@
-package entities;
+package entities.enemies;
 
-import entities.Enemy;
+import entities.enemies.Enemy;
 import flixel.FlxObject;
 import flixel.util.FlxColor;
 import flixel.system.FlxAssets.FlxGraphicAsset;
@@ -13,7 +13,6 @@ class EnemySkeleton extends Enemy
 	{
 		super(X, Y, SimpleGraphic,playerRef);
 		loadGraphic(AssetPaths.skeleton__png, true, 32, 38);
-		scale.set(1.5, 1.5);
 		updateHitbox();
 		setFacingFlip(FlxObject.RIGHT, true, false);
 		setFacingFlip(FlxObject.LEFT, false, false);
