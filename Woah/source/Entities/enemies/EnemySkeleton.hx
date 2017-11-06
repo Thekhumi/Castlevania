@@ -9,9 +9,9 @@ import Math;
 class EnemySkeleton extends Enemy
 {
 
-	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset, playerRef:Player) 
+	public function new(?X:Float=0, ?Y:Float=0, playerRef:Player) 
 	{
-		super(X, Y, SimpleGraphic,playerRef);
+		super(X, Y,playerRef);
 		loadGraphic(AssetPaths.skeleton__png, true, 32, 38);
 		updateHitbox();
 		setFacingFlip(FlxObject.RIGHT, true, false);

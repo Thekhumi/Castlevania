@@ -13,6 +13,7 @@ import flixel.text.FlxText;
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
 import flixel.tile.FlxTilemap;
 import flixel.FlxObject;
+import tiles.RandomFloor;
 
 class PlayState extends FlxState
 
@@ -28,6 +29,7 @@ class PlayState extends FlxState
 	private var interfaz:Interfaz;
 	private var escaleritas:FlxTypedGroup<Escaleras>;
 	private var enemyGroup:FlxTypedGroup<Enemy>;
+	private var randomFloor:FlxTypedGroup<RandomFloor>;
 	override public function create():Void
 	{
 		super.create();
@@ -40,6 +42,7 @@ class PlayState extends FlxState
 		guia.color = 0xFF000000;
 		
 		escaleritas = new FlxTypedGroup<Escaleras>();
+		randomFloor = new FlxTypedGroup<RandomFloor>();
 		enemyGroup = new FlxTypedGroup<Enemy>();
 		
 		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.levelv3__oel);
@@ -57,13 +60,16 @@ class PlayState extends FlxState
 		bloquer = loader.loadTilemap(AssetPaths.tilesC__png, 32, 32, "BloqueR");
 		bloquer.setTileProperties(0, FlxObject.NONE);	//NADA
 		bloquer.setTileProperties(7, FlxObject.ANY);	//BLOQUE RANDOM
+		bloquer.y += 32;
 		fuego = loader.loadTilemap(AssetPaths.tilesC__png, 32, 32, "Fuego"); 
 		fuego.setTileProperties(0, FlxObject.NONE);	//NADA
 		fuego.setTileProperties(8, FlxObject.ANY);	//FUEGO
 		FlxG.worldBounds.set(0, 0, 7680, 2250);
 		
 		loader.loadEntities(stairs, "Climb");
+		loader.loadEntities(Disap, "Disap");
 		loader.loadEntities(enemy2Creator, "Murcielago");
+		//loader.loadEntities(enemy1Creator, "Esqueleto");
 		
 		player = new Player(0, 0);
 		
@@ -78,7 +84,7 @@ class PlayState extends FlxState
 		add(escaleritas);
 		add(escalera);
 		add(cinta);
-		add(bloquer);
+		add(randomFloor);
 		add(fuego);
 		
 		add(player);
@@ -99,13 +105,27 @@ class PlayState extends FlxState
 		st.y = y-12;
 		escaleritas.add(st);
 	}
+	private function Disap (entityName:String, entityData: Xml) //PISO RANDOM
+	{
+		var x:Int = Std.parseInt(entityData.get("x"));
+		var y:Int = Std.parseInt(entityData.get("y"));
+		var flo:RandomFloor = new RandomFloor();
+		flo.x = x;
+		flo.y = y;
+		randomFloor.add(flo);
+	}
+	/*private function enemy1Creator(entityName:String, entityData:Xml)//ESQUELETOS
+	{
+		var x:Int = Std.parseInt(entityData.get("x"));
+		var y:Int = Std.parseInt(entityData.get("y"));
+		var esq:EnemySkeleton = new EnemySkeleton(x,y,player);
+		enemyGroup.add(esq);		
+	}*/
 	private function enemy2Creator(entityName:String, entityData:Xml)//MURCIELAGOS
 	{
 		var x:Int = Std.parseInt(entityData.get("x"));
 		var y:Int = Std.parseInt(entityData.get("y"));
-		var bat:Bats = new Bats();
-		bat.x = x;
-		bat.y = y;	
+		var bat:Bats = new Bats(x,y,player);
 		enemyGroup.add(bat);		
 	}
 	override public function update(elapsed:Float):Void
@@ -115,6 +135,7 @@ class PlayState extends FlxState
 		guia.y = player.y - 230;//guia camara
 		FlxG.collide(player, tileBase);
 		FlxG.collide(player, escalera);
+		FlxG.collide(player, randomFloor);
 		if (FlxG.collide(player, cinta))
 		{
 			player.x += 5;

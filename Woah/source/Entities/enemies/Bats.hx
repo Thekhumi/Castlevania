@@ -9,9 +9,9 @@ import Math;
 class Bats extends Enemy
 {
 
-	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
+	public function new(?X:Float=0, ?Y:Float=0, playerRef:Player) 
 	{
-		super(X, Y, SimpleGraphic,playerRef);
+		super(X, Y,playerRef);
 		loadGraphic(AssetPaths.bat__png, true, 32, 32);
 		updateHitbox();
 		setFacingFlip(FlxObject.RIGHT, true, false);

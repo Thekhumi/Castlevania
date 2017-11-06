@@ -71,8 +71,6 @@ class Player extends FlxSprite
 					actionState = Estados.FALLING;
 				else if (velocity.x != 0)
 					actionState = Estados.RUN;
-				else if (FlxG.keys.pressed.UP)
-					actionState = Estados.CLIMB;
 				else if (FlxG.keys.justPressed.Z)
 				{
 					actionState = Estados.ATTACK;
