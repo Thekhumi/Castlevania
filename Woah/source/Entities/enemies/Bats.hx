@@ -20,6 +20,7 @@ class Bats extends Enemy
 		animation.play("fly");
 		danio = 75;
 		velocity.y = 0;
+		acceleration.y = 0;
 	}
 	
 	override public function update(elapsed:Float):Void 

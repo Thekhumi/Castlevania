@@ -17,6 +17,7 @@ import flixel.FlxG;
 	METRALLETA;
 	ESCOPETA;
 	BALAS;
+	CURA;
 	
  }
 class Item extends FlxSprite 
@@ -37,15 +38,18 @@ class Item extends FlxSprite
 	}
 	private function pickUp(yo:Item, player:Player):Void
 	{
-		if (tipo == BALAS) 
+		switch (tipo) 
 		{
-			player.addMun(25);
-			this.visible= false;
-			this.destroy;
-		} else if (FlxG.keys.justPressed.X) {
-			player.setArma(tipo);
-			this.visible = false;
-			this.destroy;
+			case BALAS:
+				player.addMun(10);
+			case CURA:
+				player.curarse();
+			default:
+				if (FlxG.keys.justPressed.X) 
+				{
+					player.setArma(tipo);
+				}
 		}
+		this.destroy();
 	}
 }

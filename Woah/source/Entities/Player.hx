@@ -174,6 +174,10 @@ class Player extends FlxSprite
 		}
 		else x -= 25;
 	}
+	public function curarse():Void
+	{
+		vida += 100;
+	}
 	public function fueguin():Void
 	{
 		actionState = Estados.DAMAGE;

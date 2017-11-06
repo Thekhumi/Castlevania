@@ -5,6 +5,7 @@ import flixel.FlxObject;
 import flixel.util.FlxColor;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import Math;
+import flixel.FlxG;
 
 class EnemySkeleton extends Enemy
 {

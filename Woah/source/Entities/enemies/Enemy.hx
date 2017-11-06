@@ -39,7 +39,4 @@ class Enemy extends FlxSprite
 	{
 		return actionState;
 	}
-	
-
-	
 }
