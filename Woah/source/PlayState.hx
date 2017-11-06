@@ -94,8 +94,6 @@ class PlayState extends FlxState
 		add(interfaz);
 		
 		FlxG.camera.follow(guia);
-		
-		FlxG.sound.load(AssetPaths.Spooky__wav, 1, false).play();
 	}
 	
 	private function stairs (entityName:String, entityData: Xml) //ESCALERAS
