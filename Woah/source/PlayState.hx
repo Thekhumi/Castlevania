@@ -4,6 +4,7 @@ import entities.enemies.Bats;
 import entities.enemies.Enemy;
 import entities.enemies.EnemySkeleton;
 import entities.Player;
+import tiles.Cinta;
 import tiles.Escaleras;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -30,6 +31,7 @@ class PlayState extends FlxState
 	private var escaleritas:FlxTypedGroup<Escaleras>;
 	private var enemyGroup:FlxTypedGroup<Enemy>;
 	private var randomFloor:FlxTypedGroup<RandomFloor>;
+	private var cintita:FlxTypedGroup<Cinta>;
 	override public function create():Void
 	{
 		super.create();
@@ -43,6 +45,7 @@ class PlayState extends FlxState
 		
 		escaleritas = new FlxTypedGroup<Escaleras>();
 		randomFloor = new FlxTypedGroup<RandomFloor>();
+		cintita = new FlxTypedGroup<Cinta>();
 		enemyGroup = new FlxTypedGroup<Enemy>();
 		
 		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.levelv3__oel);
@@ -51,8 +54,7 @@ class PlayState extends FlxState
 		tileBase.setTileProperties(1, FlxObject.ANY);	//SUELO
 		tileBase.setTileProperties(2, FlxObject.ANY);	//RELLENO
 		tileBase.setTileProperties(4, FlxObject.NONE);	//AGUA
-		escalera = loader.loadTilemap(AssetPaths.tilesC__png, 32, 32, "Escaleras"); 
-		escalera.setTileProperties(0, FlxObject.NONE);	//NADA
+		escalera = loader.loadTilemap(AssetPaths.Stairs__png, 32, 32, "Escaleras"); 
 		escalera.setTileProperties(3, FlxObject.UP);	//ESCALERAS
 		cinta = loader.loadTilemap(AssetPaths.tilesC__png, 32, 32, "Cinta"); 
 		cinta.setTileProperties(0, FlxObject.NONE);	//NADA
@@ -70,6 +72,7 @@ class PlayState extends FlxState
 		
 		loader.loadEntities(stairs, "Climb");
 		loader.loadEntities(Disap, "Disap");
+		loader.loadEntities(Wheel, "Slide");
 		loader.loadEntities(enemy2Creator, "Murcielago");
 		loader.loadEntities(enemy1Creator, "Esqueleto");
 		
@@ -83,7 +86,7 @@ class PlayState extends FlxState
 		add(tileBase);
 		add(escaleritas);
 		add(escalera);
-		add(cinta);
+		add(cintita);
 		add(randomFloor);
 		add(fuego);
 		
@@ -114,11 +117,20 @@ class PlayState extends FlxState
 		flo.y = y;
 		randomFloor.add(flo);
 	}
+	private function Wheel (entityName:String, entityData: Xml)//TRONCO
+	{
+		var x:Int = Std.parseInt(entityData.get("x"));
+		var y:Int = Std.parseInt(entityData.get("y"));
+		var log:Cinta = new Cinta();
+		log.x = x;
+		log.y = y;
+		cintita.add(log);
+	}
 	private function enemy1Creator(entityName:String, entityData:Xml)//ESQUELETOS
 	{
 		var x:Int = Std.parseInt(entityData.get("x"));
 		var y:Int = Std.parseInt(entityData.get("y"));
-		var esq:EnemySkeleton = new EnemySkeleton(x,y,player);
+		var esq:EnemySkeleton = new EnemySkeleton(x,y-32,player);
 		enemyGroup.add(esq);		
 	}
 	
@@ -137,9 +149,9 @@ class PlayState extends FlxState
 		FlxG.collide(player, tileBase);
 		FlxG.collide(player, escalera);
 		FlxG.collide(player, randomFloor);
-		if (FlxG.collide(player, cinta))
+		if (FlxG.collide(player, cintita))
 		{
-			player.x += 5;
+			player.x += 3;
 		}
 		if (FlxG.collide(player, fuego))
 		{
@@ -159,7 +171,15 @@ class PlayState extends FlxState
 		if (FlxG.overlap(player, enemy))
 		{
 			player.recibirDanio(enemy.danio, enemy.x);
+		}
+		for (i in 0... enemyGroup.members.length)
+		{
+			var spoopy:Enemy = enemyGroup.members[i];
+			if (FlxG.overlap(player, spoopy) && player.actionState == Estados.ATTACK)
+				enemyGroup.remove(spoopy, true);
 			
+			if (FlxG.overlap(player, spoopy)&& player.actionState != Estados.ATTACK)
+				player.recibirDanio(enemy.danio, enemy.x);
 		}
 		if (FlxG.overlap(player, escaleritas) && (FlxG.keys.pressed.UP||FlxG.keys.pressed.DOWN))
 		{

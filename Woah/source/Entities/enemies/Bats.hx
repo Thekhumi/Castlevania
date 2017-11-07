@@ -73,7 +73,6 @@ class Bats extends Enemy
 			
 			if (FlxG.collide(this,playerRef)) 
 			{
-				playerRef.recibirDanio(danio, this.x);
 				actionState = EstadosEnemy.RUN;
 			}
 		}

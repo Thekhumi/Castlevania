@@ -79,7 +79,7 @@ class EnemySkeleton extends Enemy
 	
 	function checkDistancia():Bool 
 	{
-		if (Math.abs(playerRef.x - this.x) < 300)
+		if (Math.abs(playerRef.x - this.x) < 100)
 		{
 			return true;
 		}
