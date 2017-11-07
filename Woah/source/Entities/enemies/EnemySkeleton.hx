@@ -10,9 +10,9 @@ import flixel.FlxG;
 class EnemySkeleton extends Enemy
 {
 
-	public function new(?X:Float=0, ?Y:Float=0, playerRef:Player) 
+	public function new(?X:Float=0, ?Y:Float=0, player:Player) 
 	{
-		super(X, Y,playerRef);
+		super(X, Y,player);
 		loadGraphic(AssetPaths.skeleton__png, true, 32, 38);
 		updateHitbox();
 		setFacingFlip(FlxObject.RIGHT, true, false);
@@ -24,8 +24,8 @@ class EnemySkeleton extends Enemy
 	
 	override public function update(elapsed:Float):Void 
 	{
-		checkEstados();
 		super.update(elapsed);
+		checkEstados();
 	}
 	
 	function checkEstados() 

@@ -26,11 +26,11 @@ class Enemy extends FlxSprite
 		actionState = IDLE;
 		vida = Reg.enemyVidaBase;
 		playerRef = player;
+		acceleration.y = Reg.gravedad;
 	}
 	
 	override public function update(elapsed:Float):Void 
 	{
-		acceleration.y = Reg.gravedad;
 		super.update(elapsed);
 	}
 	

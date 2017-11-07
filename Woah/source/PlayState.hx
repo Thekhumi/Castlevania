@@ -66,12 +66,12 @@ class PlayState extends FlxState
 		fuego.setTileProperties(8, FlxObject.ANY);	//FUEGO
 		FlxG.worldBounds.set(0, 0, 7680, 2250);
 		
+		player = new Player(0, 0);
+		
 		loader.loadEntities(stairs, "Climb");
 		loader.loadEntities(Disap, "Disap");
 		loader.loadEntities(enemy2Creator, "Murcielago");
-		//loader.loadEntities(enemy1Creator, "Esqueleto");
-		
-		player = new Player(0, 0);
+		loader.loadEntities(enemy1Creator, "Esqueleto");
 		
 		enemy = new EnemySkeleton(400, 0, player);
 		enemy.width = 16;
@@ -114,13 +114,14 @@ class PlayState extends FlxState
 		flo.y = y;
 		randomFloor.add(flo);
 	}
-	/*private function enemy1Creator(entityName:String, entityData:Xml)//ESQUELETOS
+	private function enemy1Creator(entityName:String, entityData:Xml)//ESQUELETOS
 	{
 		var x:Int = Std.parseInt(entityData.get("x"));
 		var y:Int = Std.parseInt(entityData.get("y"));
 		var esq:EnemySkeleton = new EnemySkeleton(x,y,player);
 		enemyGroup.add(esq);		
-	}*/
+	}
+	
 	private function enemy2Creator(entityName:String, entityData:Xml)//MURCIELAGOS
 	{
 		var x:Int = Std.parseInt(entityData.get("x"));
