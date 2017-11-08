@@ -19,6 +19,7 @@ import flixel.addons.editors.ogmo.FlxOgmoLoader;
 import flixel.tile.FlxTilemap;
 import flixel.FlxObject;
 import tiles.RandomFloor;
+import entities.Disparo;
 
 class PlayState extends FlxState
 
@@ -79,7 +80,7 @@ class PlayState extends FlxState
 		fuego.setTileProperties(8, FlxObject.ANY);	//FUEGO
 		FlxG.worldBounds.set(0, 0, 7680, 2250);
 		
-		player = new Player(0, 0);
+		player = new Player(0, 0, this);
 		
 		loader.loadEntities(stairs, "Climb");
 		loader.loadEntities(Disap, "Disap");
@@ -89,6 +90,9 @@ class PlayState extends FlxState
 		loader.loadEntities(enemy2Creator, "Murcielago");
 		loader.loadEntities(enemy1Creator, "Esqueleto");
 		loader.loadEntities(enemy3Creator, "BadFish");
+		
+		Disparo.setEnemigo(enemyGroup);
+		Disparo.setTerreno(tileBase);
 		
 		enemy = new EnemySkeletonShield(400, 0, player);
 		enemy.width = 16;

@@ -5,6 +5,7 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.math.FlxRandom;
 import flixel.FlxG;
 import entities.Player.Estados;
+import entities.Balas;
 /**
  * ...
  * @author
