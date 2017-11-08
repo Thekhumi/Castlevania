@@ -180,6 +180,7 @@ class Player extends FlxSprite
 	}
 	public function fueguin():Void
 	{
+		FlxG.sound.play(AssetPaths.quemadura__ogg,1,false,true);
 		actionState = Estados.DAMAGE;
 		vida -= 75;
 	}

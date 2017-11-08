@@ -2,6 +2,7 @@ package entities.enemies;
 
 import entities.enemies.Enemy;
 import flixel.FlxObject;
+import flixel.system.FlxSound;
 import flixel.util.FlxColor;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import Math;
@@ -20,6 +21,7 @@ class EnemySkeleton extends Enemy
 		animation.add("chase", [0, 1, 2, 1], 8, true);
 		animation.play("chase");
 		danio = 75;
+		sonido.loadEmbedded(AssetPaths.huesos__ogg ,false,false);
 	}
 	
 	override public function update(elapsed:Float):Void 

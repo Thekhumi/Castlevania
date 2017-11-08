@@ -8,6 +8,7 @@ import Math;
 import flixel.FlxG;
 class Bats extends Enemy
 {
+
 	private var esperar:Float;
 	public function new(?X:Float=0, ?Y:Float=0, player:Player) 
 	{
@@ -23,6 +24,7 @@ class Bats extends Enemy
 		acceleration.y = 0;
 		esperar = 0;
 		actionState = EstadosEnemy.IDLE;
+		sonido.loadEmbedded(AssetPaths.murcielagos__ogg, false, false);
 	}
 	
 	override public function update(elapsed:Float):Void 
