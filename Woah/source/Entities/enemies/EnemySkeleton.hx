@@ -11,9 +11,9 @@ import flixel.FlxG;
 class EnemySkeleton extends Enemy
 {
 
-	public function new(?X:Float=0, ?Y:Float=0, player:Player) 
+	public function new(?X:Float=0, ?Y:Float=0, player:Player, estado:PlayState) 
 	{
-		super(X, Y,player);
+		super(X, Y,player, estado);
 		loadGraphic(AssetPaths.skeleton__png, true, 32, 38);
 		updateHitbox();
 		setFacingFlip(FlxObject.RIGHT, true, false);

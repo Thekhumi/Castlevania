@@ -23,12 +23,13 @@ class Caja extends FlxSprite
 		jugador = player;
 		estado = state;
 		updateHitbox;
-		acceleration.y = Reg.gravedad;
+		//acceleration.y = Reg.gravedad;
+		this.immovable = true;
 	}
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		if (FlxG.overlap(jugador, this) && jugador.actionState == Estados.ATTACK)
+		if (FlxG.overlap(jugador.woahHit, this) && jugador.actionState == Estados.ATTACK)
 		{
 			var r:FlxRandom = new FlxRandom();
 			var obj:Item;
