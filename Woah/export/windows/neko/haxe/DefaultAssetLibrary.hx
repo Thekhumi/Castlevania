@@ -98,10 +98,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
-<<<<<<< HEAD
-=======
 		
->>>>>>> master
+		
+		
+		
+		
 		Font.registerFont (__ASSET__flixel_fonts_nokiafc22_ttf);
 		Font.registerFont (__ASSET__flixel_fonts_monsterrat_ttf);
 		
@@ -151,10 +152,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
-<<<<<<< HEAD
-=======
 		useManifest = true;
->>>>>>> master
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		
 		className.set ("flixel/sounds/beep.ogg", __ASSET__flixel_sounds_beep_ogg);
 		type.set ("flixel/sounds/beep.ogg", AssetType.SOUND);
@@ -698,10 +700,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
-<<<<<<< HEAD
-=======
 		
->>>>>>> master
+		
+		
+		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_monsterrat_ttf);
 		
@@ -733,6 +736,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/images/C Damage.png", AssetType.IMAGE);
 		path.set ("assets/images/CFULLclone.png", "assets/images/CFULLclone.png");
 		type.set ("assets/images/CFULLclone.png", AssetType.IMAGE);
+		path.set ("assets/images/Chikologo.png", "assets/images/Chikologo.png");
+		type.set ("assets/images/Chikologo.png", AssetType.IMAGE);
 		path.set ("assets/images/clone.png", "assets/images/clone.png");
 		type.set ("assets/images/clone.png", AssetType.IMAGE);
 		path.set ("assets/images/CTileset.png", "assets/images/CTileset.png");
@@ -745,8 +750,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/images/Fire.png", AssetType.IMAGE);
 		path.set ("assets/images/fondoBienPete.png", "assets/images/fondoBienPete.png");
 		type.set ("assets/images/fondoBienPete.png", AssetType.IMAGE);
+		path.set ("assets/images/gameover.png", "assets/images/gameover.png");
+		type.set ("assets/images/gameover.png", AssetType.IMAGE);
 		path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");
 		type.set ("assets/images/images-go-here.txt", AssetType.TEXT);
+		path.set ("assets/images/Menu.png", "assets/images/Menu.png");
+		type.set ("assets/images/Menu.png", AssetType.IMAGE);
 		path.set ("assets/images/metralleta.png", "assets/images/metralleta.png");
 		type.set ("assets/images/metralleta.png", AssetType.IMAGE);
 		path.set ("assets/images/nada.png", "assets/images/nada.png");
@@ -845,6 +854,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/images/CFULLclone.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Chikologo.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/images/clone.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
@@ -863,9 +875,15 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/images/fondoBienPete.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
+		id = "assets/images/gameover.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/images/images-go-here.txt";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
+		id = "assets/images/Menu.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/images/metralleta.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
@@ -1019,10 +1037,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
-<<<<<<< HEAD
-=======
 		useManifest = true;
->>>>>>> master
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		
 		className.set ("flixel/sounds/beep.ogg", __ASSET__flixel_sounds_beep_ogg);
 		type.set ("flixel/sounds/beep.ogg", AssetType.SOUND);
@@ -1799,10 +1818,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> master
+
+
+
+
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends null { }
@@ -1855,10 +1875,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> master
+
+
+
+
 @:keep #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends lime.text.Font { public function new () { super (); name = "Nokia Cellphone FC Small"; } } 
 @:keep #if display private #end class __ASSET__flixel_fonts_monsterrat_ttf extends lime.text.Font { public function new () { super (); name = "Monsterrat"; } } 
 

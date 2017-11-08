@@ -38,6 +38,8 @@ class AssetData {
 			type.set ("assets/images/C Damage.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/CFULLclone.png", "assets/images/CFULLclone.png");
 			type.set ("assets/images/CFULLclone.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/Chikologo.png", "assets/images/Chikologo.png");
+			type.set ("assets/images/Chikologo.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/clone.png", "assets/images/clone.png");
 			type.set ("assets/images/clone.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/CTileset.png", "assets/images/CTileset.png");
@@ -50,8 +52,12 @@ class AssetData {
 			type.set ("assets/images/Fire.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/fondoBienPete.png", "assets/images/fondoBienPete.png");
 			type.set ("assets/images/fondoBienPete.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/gameover.png", "assets/images/gameover.png");
+			type.set ("assets/images/gameover.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");
 			type.set ("assets/images/images-go-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/images/Menu.png", "assets/images/Menu.png");
+			type.set ("assets/images/Menu.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/metralleta.png", "assets/images/metralleta.png");
 			type.set ("assets/images/metralleta.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/nada.png", "assets/images/nada.png");

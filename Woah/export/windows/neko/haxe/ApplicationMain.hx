@@ -515,11 +515,7 @@ class ApplicationMain {
 		
 		config = {
 			
-<<<<<<< HEAD
-			build: "331",
-=======
-			build: "381",
->>>>>>> master
+			build: "14",
 			company: "tuMami",
 			file: "Woah",
 			fps: 60,
