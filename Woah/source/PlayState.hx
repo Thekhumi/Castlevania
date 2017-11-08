@@ -52,16 +52,8 @@ class PlayState extends FlxState
 		fondo = new FlxSprite(0, 0, AssetPaths.fondoBienPete__png);
 		
 		guia = new FlxSprite(0, 0);
-		guia.makeGraphic(256, 100);
+		guia.makeGraphic(256, 240);
 		guia.color = 0xFF000000;
-	
-		
-		border1 = new FlxSprite( -2, -2);
-		border1.makeGraphic(2, 1500, 0x00000000);
-		border1.immovable = true;
-		border2 = new FlxSprite( -2, -2);
-		border2.makeGraphic(5500, 2, 0x00000000);
-		border2.immovable = true;
 		
 		escaleritas = new FlxTypedGroup<Escaleras>();
 		watery = new FlxTypedGroup<Water>();
@@ -109,16 +101,13 @@ class PlayState extends FlxState
 		Disparo.setEnemigo(enemyGroup);
 		Disparo.setTerreno(tileBase);
 		
-		enemy = new EnemySkeletonShield(400, 0, player);
+		enemy = new EnemySkeletonShield(400, 0, player,this);
 		enemy.width = 16;
 		enemy.height = 32;
 		enemy.offset.x = 8;
 		enemy.offset.y = 6;
 		
-		caja = new Caja(100, 0, player, this);
-		
-		add(border1);
-		add(border2);
+		//caja = new Caja(100, 0, player, this);
 		
 		add(escaleritas);
 		add(guia);
@@ -134,7 +123,7 @@ class PlayState extends FlxState
 		add(player.woahHit);
 		add(player);
 		add(enemy);
-		add(caja);
+		//add(caja);
 		add(enemyGroup);
 		interfaz = new Interfaz(player, this);
 		add(interfaz);
@@ -199,7 +188,7 @@ class PlayState extends FlxState
 	{
 		var x:Int = Std.parseInt(entityData.get("x"));
 		var y:Int = Std.parseInt(entityData.get("y"));
-		var esq:EnemySkeleton = new EnemySkeleton(x,y-32,player);
+		var esq:EnemySkeleton = new EnemySkeleton(x,y-32,player, this);
 		enemyGroup.add(esq);		
 	}
 	
@@ -207,27 +196,25 @@ class PlayState extends FlxState
 	{
 		var x:Int = Std.parseInt(entityData.get("x"));
 		var y:Int = Std.parseInt(entityData.get("y"));
-		var bat:Bats = new Bats(x,y,player);
+		var bat:Bats = new Bats(x,y,player,this);
 		enemyGroup.add(bat);		
 	}
 		private function enemy3Creator(entityName:String, entityData:Xml)//PIRANIAS
 	{
 		var x:Int = Std.parseInt(entityData.get("x"));
 		var y:Int = Std.parseInt(entityData.get("y"));
-		var pir:Pirania = new Pirania(x,y,player);
+		var pir:Pirania = new Pirania(x,y,player,this);
 		enemyGroup.add(pir);		
 	}
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
 		guia.x = player.x - 75;//guia camara
-		guia.y = player.y - 50;//guia camara
+		guia.y = player.y - 235;//guia camara
 		FlxG.collide(player, tileBase);
 		FlxG.collide(player, escalera);
 		FlxG.collide(player, randomFloor);
 		FlxG.collide(player, cajitas);
-		FlxG.collide(guia, border1);
-		FlxG.collide(guia, border2);
 		if (FlxG.collide(player, cintita))
 		{
 			player.x += 3;
@@ -240,7 +227,7 @@ class PlayState extends FlxState
 		}
 		FlxG.collide(enemy, tileBase);
 		FlxG.collide(enemyGroup, tileBase);
-		FlxG.collide(caja, tileBase);
+		//FlxG.collide(caja, tileBase);
 		FlxG.collide(cajitas, tileBase);
 		FlxG.collide(cajitas, cajitas);
 		player.acceleration.y = Reg.gravedad;
@@ -268,26 +255,29 @@ class PlayState extends FlxState
 		for (i in 0... enemyGroup.members.length)
 		{
 			var spoopy:Enemy = enemyGroup.members[i];
-			if (FlxG.overlap(player, spoopy) && player.actionState == Estados.ATTACK)
+			if (FlxG.overlap(player.woahHit, spoopy) && player.actionState == Estados.ATTACK)
 			{
 				if (spoopy.get_tieneEscudo())
 				{
 					if (spoopy.get_attackDirection() == "Right" && spoopy.x > player.x)
 					{
+						spoopy.drop();
 						enemyGroup.remove(spoopy, true);
 					}
 					else 
 					if (spoopy.get_attackDirection() == "Left" && spoopy.x < player.x)
 					{
+						spoopy.drop();
 						enemyGroup.remove(spoopy, true);
 					}
 				}
 				else
+				spoopy.drop();
 				enemyGroup.remove(spoopy, true);
 			}
-			if (FlxG.overlap(player, spoopy) && player.actionState != Estados.ATTACK)
+			if (player.esVulnerable() && FlxG.overlap(player, spoopy) && player.actionState != Estados.ATTACK)
 			{
-				player.recibirDanio(enemy.danio, enemy.x);
+				player.recibirDanio(spoopy.danio, spoopy.x);
 			}
 		}
 		if (FlxG.overlap(player, escaleritas) && (FlxG.keys.pressed.UP||FlxG.keys.pressed.DOWN))

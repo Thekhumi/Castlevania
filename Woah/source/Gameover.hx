@@ -11,12 +11,15 @@ class Gameover extends FlxState
 	var butonNew:FlxButton;
 	var back:FlxSprite;
 
-	public function new() 
+	override public function create():Void 
 	{
 		back = new FlxSprite(0, 0, AssetPaths.gameover__png);
 		
 		var init_x:Int = Math.floor(FlxG.width / 2 - 40);
 		butonNew = new FlxButton(init_x, 175, "Woah Again", onNew);
+		add(back);
+		add(butonNew);
+		
 	}
 	override public function update(elapsed:Float):Void 
 	{

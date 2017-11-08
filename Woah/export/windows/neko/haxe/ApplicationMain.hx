@@ -57,8 +57,8 @@ class ApplicationMain {
 				
 				#if mobile
 				
-				forceWidth = 256;
-				forceHeight = 240;
+				forceWidth = 1080;
+				forceHeight = 740;
 				
 				container = new flash.display.Sprite ();
 				barA = new flash.display.Sprite ();
@@ -127,7 +127,7 @@ class ApplicationMain {
 				}
 				
 			},
-			256, 240, 
+			1080, 740, 
 			60, 
 			0,
 			(true ? flash.Lib.HARDWARE : 0) |
@@ -248,13 +248,13 @@ class ScaledStage extends flash.display.Stage {
 	
 	private override function get_stageHeight ():Int {
 		
-		return 240;
+		return 740;
 	
 	}
 	
 	private override function get_stageWidth ():Int {
 		
-		return 256;
+		return 1080;
 	
 	}
 	
@@ -325,11 +325,11 @@ class ApplicationMain {
 		wx.App.boot (function () {
 			
 			
-			frame = wx.Frame.create (null, null, "Woah", null, { width: 256, height: 240 });
+			frame = wx.Frame.create (null, null, "Woah", null, { width: 1080, height: 740 });
 			
 			
 			#if openfl
-			var stage = wx.NMEStage.create (frame, null, null, { width: 256, height: 240 });
+			var stage = wx.NMEStage.create (frame, null, null, { width: 1080, height: 740 });
 			#end
 			
 			var hasMain = false;
@@ -515,15 +515,7 @@ class ApplicationMain {
 		
 		config = {
 			
-<<<<<<< HEAD
-			build: "57",
-=======
-<<<<<<< Updated upstream
-			build: "37",
-=======
-			build: "34",
->>>>>>> Stashed changes
->>>>>>> master
+			build: "26",
 			company: "tuMami",
 			file: "Woah",
 			fps: 60,
@@ -541,13 +533,13 @@ class ApplicationMain {
 					display: 0,
 					fullscreen: false,
 					hardware: true,
-					height: 240,
+					height: 740,
 					parameters: "{}",
 					resizable: true,
 					stencilBuffer: false,
 					title: "Woah",
 					vsync: true,
-					width: 256,
+					width: 1080,
 					x: null,
 					y: null
 				},
@@ -557,7 +549,7 @@ class ApplicationMain {
 		
 		#if (js && html5)
 		#if (munit || utest)
-		openfl.Lib.embed (null, 256, 240, "null");
+		openfl.Lib.embed (null, 1080, 740, "null");
 		#end
 		#else
 		create ();

@@ -30,6 +30,7 @@ class Player extends FlxSprite
 	private var arma:Tipo;
 	private var estado:PlayState;
 	private var cooldown:Float;
+	private var vulnerable:Bool;
 	public function new(?X:Float = 0, ?Y:Float = 0, ?SimpleGraphic:FlxGraphicAsset, _estado:PlayState)
 	{
 		super(X, Y, SimpleGraphic);
@@ -57,7 +58,7 @@ class Player extends FlxSprite
 		vida = Reg.playerVidaMax;
 		mun = 0;
 		arma = NADA;
-		
+		vulnerable = true;
 		woahHit = new FlxSprite();
 		woahHit.makeGraphic(30,12, 0x00000000);
 		woahHit.kill();
@@ -73,6 +74,10 @@ class Player extends FlxSprite
 		if (cooldown < 1)
 		{
 			cooldown += elapsed;
+		}
+		if (vida <=0) 
+		{
+			muerte();
 		}
 	}
 
@@ -306,7 +311,19 @@ class Player extends FlxSprite
 	{
 		actionState = Estados.DAMAGE;
 		vida -= cantidad;
-
+		vulnerable = false;
+		var reloj:Timer = new Timer(300);
+		var contador:Int = 0;
+		reloj.run = function ()
+		{
+			visible = !visible;
+			contador++;
+			if (contador >=4) 
+			{
+				vulnerable = true;
+				reloj.stop();
+			}
+		}
 		if (this.x > xFuente)
 		{
 			x +=  25;
@@ -363,5 +380,14 @@ class Player extends FlxSprite
 	public function getArma():Tipo
 	{
 		return arma;
+	}
+	public function esVulnerable():Bool
+	{
+		return vulnerable;
+	}
+	private function muerte():Void
+	{
+		var gameover:Gameover = new Gameover();
+		FlxG.switchState(gameover);
 	}
 }

@@ -42,7 +42,7 @@ class Item extends FlxSprite
 			switch (tipo)
 			{
 				case BALAS:
-					player.addMun(10);
+					player.addMun(5);
 				case CURA:
 					player.curarse();
 				default:
