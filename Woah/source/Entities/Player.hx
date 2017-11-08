@@ -62,15 +62,6 @@ class Player extends FlxSprite
 		{
 			cooldown += elapsed;
 		}
-		else
-		{
-		}
-		//para testear
-		if (mun>=0 && mun <15)
-		{
-			mun++;
-		}
-		arma = Tipo.METRALLETA;
 	}
 
 	private function checkEstados():Void
@@ -178,6 +169,13 @@ class Player extends FlxSprite
 				{
 					actionState = Estados.IDLE;
 				}
+				if (velocity.y == 0)
+				{
+					if (velocity.x == 0)
+						actionState = Estados.IDLE;
+					else
+						actionState = Estados.RUN;
+				}
 			//CLIMB
 			case Estados.CLIMB:
 				animation.play("up");
@@ -196,10 +194,6 @@ class Player extends FlxSprite
 	{
 		if (mun > 0 && cooldown >= 1)
 		{
-			if (velocity.y == 0) 
-			{
-				velocity.x = 0;
-			}
 			var direc:Bool;
 			if (facing == FlxObject.RIGHT)
 			{
