@@ -9,7 +9,6 @@ import flixel.ui.FlxButton;
 class MenuState extends FlxState 
 {
 	private var fondo:FlxSprite;
-	private var splash:FlxSprite;
 	var logo:FlxSprite;
 	var butonNew:flixel.ui.FlxButton;
 	var text:FlxText;

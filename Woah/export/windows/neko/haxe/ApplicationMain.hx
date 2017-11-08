@@ -515,7 +515,15 @@ class ApplicationMain {
 		
 		config = {
 			
+<<<<<<< HEAD
 			build: "57",
+=======
+<<<<<<< Updated upstream
+			build: "37",
+=======
+			build: "34",
+>>>>>>> Stashed changes
+>>>>>>> master
 			company: "tuMami",
 			file: "Woah",
 			fps: 60,

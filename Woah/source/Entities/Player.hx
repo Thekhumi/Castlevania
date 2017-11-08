@@ -25,7 +25,7 @@ class Player extends FlxSprite
 	public var atacc:FlxSprite;
 	public var woahHit(get, null):FlxSprite;
 	public var actionState(get, null):Estados;
-	private var vida:Float;
+	public var vida:Float;
 	private var mun:Int;
 	private var arma:Tipo;
 	private var estado:PlayState;
