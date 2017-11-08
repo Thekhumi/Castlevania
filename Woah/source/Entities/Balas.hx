@@ -13,6 +13,7 @@ class Balas extends Item
 	{
 		super(X, Y, SimpleGraphic, player);
 		loadGraphic(AssetPaths.balas__png);
+		updateHitbox();
 		tipo  = Tipo.BALAS;
 	}
 	

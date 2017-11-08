@@ -14,6 +14,7 @@ class Pistola extends Item
 	{
 		super(X, Y, SimpleGraphic, player);
 		loadGraphic(AssetPaths.pistola__png);
+		updateHitbox();
 		tipo = Tipo.PISTOLA;
 	}
 	

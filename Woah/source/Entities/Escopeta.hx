@@ -14,6 +14,7 @@ class Escopeta extends Item
 	{
 		super(X, Y, SimpleGraphic, player);
 		loadGraphic(AssetPaths.escopeta__png);
+		updateHitbox();
 		tipo = Tipo.ESCOPETA;
 	}
 	
