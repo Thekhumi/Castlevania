@@ -16,6 +16,8 @@ class AssetData {
 		
 		if (!initialized) {
 			
+			path.set ("assets/data/levelv2.oel", "assets/data/levelv2.oel");
+			type.set ("assets/data/levelv2.oel", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/data/levelv3.oel", "assets/data/levelv3.oel");
 			type.set ("assets/data/levelv3.oel", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/data/NewTileset.png", "assets/data/NewTileset.png");
@@ -72,6 +74,8 @@ class AssetData {
 			type.set ("assets/images/skeleton.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/Stairs.png", "assets/images/Stairs.png");
 			type.set ("assets/images/Stairs.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/tilesetbase.png", "assets/images/tilesetbase.png");
+			type.set ("assets/images/tilesetbase.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/TilesPetes.png", "assets/images/TilesPetes.png");
 			type.set ("assets/images/TilesPetes.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/verySpookySkeleton.png", "assets/images/verySpookySkeleton.png");

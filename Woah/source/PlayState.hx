@@ -20,6 +20,7 @@ import flixel.tile.FlxTilemap;
 import flixel.FlxObject;
 import tiles.RandomFloor;
 import entities.Disparo;
+import tiles.Water;
 
 class PlayState extends FlxState
 
@@ -41,6 +42,7 @@ class PlayState extends FlxState
 	private var fondo:FlxSprite;
 	private var fueguito:FlxTypedGroup<Fire>;
 	private var cajitas:FlxTypedGroup<Caja>;
+	private var watery:FlxTypedGroup<Water>;
 	override public function create():Void
 	{
 		super.create();
@@ -52,20 +54,24 @@ class PlayState extends FlxState
 		guia = new FlxSprite(0, 0);
 		guia.makeGraphic(256, 240);
 		guia.color = 0xFF000000;
+	
 		
 		escaleritas = new FlxTypedGroup<Escaleras>();
+		watery = new FlxTypedGroup<Water>();
 		randomFloor = new FlxTypedGroup<RandomFloor>();
 		cintita = new FlxTypedGroup<Cinta>();
 		fueguito = new FlxTypedGroup<Fire>();
 		cajitas = new FlxTypedGroup<Caja>();
 		enemyGroup = new FlxTypedGroup<Enemy>();
 		
-		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.levelv3__oel);
-		tileBase = loader.loadTilemap(AssetPaths.tilesC__png, 32, 32, "TilesetBase"); 
+		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.levelv2__oel);
+		tileBase = loader.loadTilemap(AssetPaths.tilesetbase__png, 32, 32, "TilesetBase"); 
 		tileBase.setTileProperties(0, FlxObject.NONE);	//NADA
 		tileBase.setTileProperties(1, FlxObject.ANY);	//SUELO
 		tileBase.setTileProperties(2, FlxObject.ANY);	//RELLENO
+		tileBase.setTileProperties(3, FlxObject.ANY);	//SUELO2
 		tileBase.setTileProperties(4, FlxObject.NONE);	//AGUA
+		tileBase.setTileProperties(5, FlxObject.ANY);	//SUELO3
 		escalera = loader.loadTilemap(AssetPaths.Stairs__png, 32, 32, "Escaleras"); 
 		escalera.setTileProperties(3, FlxObject.UP);	//ESCALERAS
 		cinta = loader.loadTilemap(AssetPaths.tilesC__png, 32, 32, "Cinta"); 
@@ -80,13 +86,15 @@ class PlayState extends FlxState
 		fuego.setTileProperties(8, FlxObject.ANY);	//FUEGO
 		FlxG.worldBounds.set(0, 0, 7680, 2250);
 		
-		player = new Player(0, 0, this);
+		FlxG.camera.setScrollBounds(0, tileBase.width, 0, tileBase.height);
+		player = new Player(120, 120, this);
 		
 		loader.loadEntities(stairs, "Climb");
 		loader.loadEntities(Disap, "Disap");
 		loader.loadEntities(Wheel, "Slide");
 		loader.loadEntities(Faiah, "Fire");
 		loader.loadEntities(Boxes, "Caja");
+		loader.loadEntities(Agoa, "Watery");
 		loader.loadEntities(enemy2Creator, "Murcielago");
 		loader.loadEntities(enemy1Creator, "Esqueleto");
 		loader.loadEntities(enemy3Creator, "BadFish");
@@ -111,6 +119,7 @@ class PlayState extends FlxState
 		add(randomFloor);
 		add(fueguito);
 		add(cajitas);
+		add(watery);
 		
 		add(player.woahHit);
 		add(player);
@@ -132,6 +141,15 @@ class PlayState extends FlxState
 		st.x = x+8;
 		st.y = y-12;
 		escaleritas.add(st);
+	}
+	private function Agoa (entityName:String, entityData: Xml) //agua
+	{
+		var x:Int = Std.parseInt(entityData.get("x"));
+		var y:Int = Std.parseInt(entityData.get("y"));
+		var wat:Water = new Water();
+		wat.x = x+8;
+		wat.y = y-12;
+		watery.add(wat);
 	}
 	private function Disap (entityName:String, entityData: Xml) //PISO RANDOM
 	{
@@ -200,7 +218,7 @@ class PlayState extends FlxState
 		FlxG.collide(player, cajitas);
 		if (FlxG.collide(player, cintita))
 		{
-			player.velocity.x += 3;
+			player.x += 3;
 		}
 		if (FlxG.collide(player, fueguito))
 		{
@@ -254,6 +272,11 @@ class PlayState extends FlxState
 		if (FlxG.overlap(player, escaleritas) && (FlxG.keys.pressed.UP||FlxG.keys.pressed.DOWN))
 		{
 			player.trepar();
+		}
+		if (FlxG.overlap(player, watery))
+		{
+			player.x = 1024;
+			player.y = 1088;
 		}
 	}
 }

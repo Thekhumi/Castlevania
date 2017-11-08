@@ -104,6 +104,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
 		Font.registerFont (__ASSET__flixel_fonts_nokiafc22_ttf);
 		Font.registerFont (__ASSET__flixel_fonts_monsterrat_ttf);
 		
@@ -113,6 +115,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -708,6 +712,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_monsterrat_ttf);
 		
@@ -717,6 +723,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
+		path.set ("assets/data/levelv2.oel", "assets/data/levelv2.oel");
+		type.set ("assets/data/levelv2.oel", AssetType.TEXT);
 		path.set ("assets/data/levelv3.oel", "assets/data/levelv3.oel");
 		type.set ("assets/data/levelv3.oel", AssetType.TEXT);
 		path.set ("assets/data/NewTileset.png", "assets/data/NewTileset.png");
@@ -773,6 +781,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/images/skeleton.png", AssetType.IMAGE);
 		path.set ("assets/images/Stairs.png", "assets/images/Stairs.png");
 		type.set ("assets/images/Stairs.png", AssetType.IMAGE);
+		path.set ("assets/images/tilesetbase.png", "assets/images/tilesetbase.png");
+		type.set ("assets/images/tilesetbase.png", AssetType.IMAGE);
 		path.set ("assets/images/TilesPetes.png", "assets/images/TilesPetes.png");
 		type.set ("assets/images/TilesPetes.png", AssetType.IMAGE);
 		path.set ("assets/images/verySpookySkeleton.png", "assets/images/verySpookySkeleton.png");
@@ -826,6 +836,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#elseif html5
 		
 		var id;
+		id = "assets/data/levelv2.oel";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
 		id = "assets/data/levelv3.oel";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
@@ -908,6 +921,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
 		id = "assets/images/Stairs.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/tilesetbase.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
 		id = "assets/images/TilesPetes.png";
@@ -1005,6 +1021,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -1833,6 +1851,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends null { }
@@ -1842,6 +1862,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
+
 
 
 
