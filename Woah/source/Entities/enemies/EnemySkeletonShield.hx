@@ -11,9 +11,9 @@ class EnemySkeletonShield extends Enemy
 {
 
 	private var timer:Float;
-	public function new(?X:Float=0, ?Y:Float=0, player:Player, estado:PlayState) 
+	public function new(?X:Float=0, ?Y:Float=0, player:Player) 
 	{
-		super(X, Y,player, estado);
+		super(X, Y,player);
 		loadGraphic(AssetPaths.verySpookySkeleton__png, true, 32, 38);
 		updateHitbox();
 		tieneEscudo = true;

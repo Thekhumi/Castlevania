@@ -10,9 +10,9 @@ class Bats extends Enemy
 {
 
 	private var esperar:Float;
-	public function new(?X:Float=0, ?Y:Float=0, player:Player, estado:PlayState) 
+	public function new(?X:Float=0, ?Y:Float=0, player:Player) 
 	{
-		super(X, Y, player, estado);
+		super(X, Y, player);
 		loadGraphic(AssetPaths.bat__png, true, 32, 32);
 		updateHitbox();
 		setFacingFlip(FlxObject.RIGHT, true, false);

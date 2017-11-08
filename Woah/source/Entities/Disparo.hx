@@ -20,7 +20,7 @@ class Disparo extends FlxSprite
 		super(X, Y, SimpleGraphic);
 		loadGraphic(AssetPaths.balin__png);
 		updateHitbox();
-		FlxG.sound.play(AssetPaths.disparo__ogg,0.5,false,true);
+		FlxG.sound.play(AssetPaths.disparo__ogg,1,false,true);
 		if (direc) 
 		{
 			velocity.x = 300;

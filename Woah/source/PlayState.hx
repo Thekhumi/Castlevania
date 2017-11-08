@@ -41,6 +41,8 @@ class PlayState extends FlxState
 	private var fondo:FlxSprite;
 	private var fueguito:FlxTypedGroup<Fire>;
 	private var cajitas:FlxTypedGroup<Caja>;
+	private var border1:FlxSprite;
+	private var border2:FlxSprite;
 	override public function create():Void
 	{
 		super.create();
@@ -50,8 +52,15 @@ class PlayState extends FlxState
 		fondo = new FlxSprite(0, 0, AssetPaths.fondoBienPete__png);
 		
 		guia = new FlxSprite(0, 0);
-		guia.makeGraphic(256, 240);
+		guia.makeGraphic(256, 100);
 		guia.color = 0xFF000000;
+		
+		border1 = new FlxSprite( -2, -2);
+		border1.makeGraphic(2, 1500, 0x00000000);
+		border1.immovable = true;
+		border2 = new FlxSprite( -2, -2);
+		border2.makeGraphic(5500, 2, 0x00000000);
+		border2.immovable = true;
 		
 		escaleritas = new FlxTypedGroup<Escaleras>();
 		randomFloor = new FlxTypedGroup<RandomFloor>();
@@ -61,11 +70,13 @@ class PlayState extends FlxState
 		enemyGroup = new FlxTypedGroup<Enemy>();
 		
 		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.levelv3__oel);
-		tileBase = loader.loadTilemap(AssetPaths.tilesC__png, 32, 32, "TilesetBase"); 
+		tileBase = loader.loadTilemap(AssetPaths.tilesetbase__png, 32, 32, "TilesetBase"); 
 		tileBase.setTileProperties(0, FlxObject.NONE);	//NADA
 		tileBase.setTileProperties(1, FlxObject.ANY);	//SUELO
 		tileBase.setTileProperties(2, FlxObject.ANY);	//RELLENO
+		tileBase.setTileProperties(3, FlxObject.ANY);	//SUELO2
 		tileBase.setTileProperties(4, FlxObject.NONE);	//AGUA
+		tileBase.setTileProperties(5, FlxObject.ANY);	//SUELO3
 		escalera = loader.loadTilemap(AssetPaths.Stairs__png, 32, 32, "Escaleras"); 
 		escalera.setTileProperties(3, FlxObject.UP);	//ESCALERAS
 		cinta = loader.loadTilemap(AssetPaths.tilesC__png, 32, 32, "Cinta"); 
@@ -80,7 +91,7 @@ class PlayState extends FlxState
 		fuego.setTileProperties(8, FlxObject.ANY);	//FUEGO
 		FlxG.worldBounds.set(0, 0, 7680, 2250);
 		
-		player = new Player(0, 0, this);
+		player = new Player(120, 120, this);
 		
 		loader.loadEntities(stairs, "Climb");
 		loader.loadEntities(Disap, "Disap");
@@ -94,13 +105,16 @@ class PlayState extends FlxState
 		Disparo.setEnemigo(enemyGroup);
 		Disparo.setTerreno(tileBase);
 		
-		//enemy = new EnemySkeletonShield(400, 0, player);
-		//enemy.width = 16;
-		//enemy.height = 32;
-		//enemy.offset.x = 8;
-		//enemy.offset.y = 6;
-		//
-		//caja = new Caja(100, 0, player, this);
+		enemy = new EnemySkeletonShield(400, 0, player);
+		enemy.width = 16;
+		enemy.height = 32;
+		enemy.offset.x = 8;
+		enemy.offset.y = 6;
+		
+		caja = new Caja(100, 0, player, this);
+		
+		add(border1);
+		add(border2);
 		
 		add(escaleritas);
 		add(guia);
@@ -114,8 +128,8 @@ class PlayState extends FlxState
 		
 		add(player.woahHit);
 		add(player);
-		//add(enemy);
-		//add(caja);
+		add(enemy);
+		add(caja);
 		add(enemyGroup);
 		interfaz = new Interfaz(player, this);
 		add(interfaz);
@@ -164,14 +178,14 @@ class PlayState extends FlxState
 	{
 		var x:Int = Std.parseInt(entityData.get("x"));
 		var y:Int = Std.parseInt(entityData.get("y"));
-		var box:Caja = new Caja(x,y,player, this);
+		var box:Caja = new Caja(x,y,"",player, this);
 		cajitas.add(box);
 	}
 	private function enemy1Creator(entityName:String, entityData:Xml)//ESQUELETOS
 	{
 		var x:Int = Std.parseInt(entityData.get("x"));
 		var y:Int = Std.parseInt(entityData.get("y"));
-		var esq:EnemySkeleton = new EnemySkeleton(x,y-32,player,this);
+		var esq:EnemySkeleton = new EnemySkeleton(x,y-32,player);
 		enemyGroup.add(esq);		
 	}
 	
@@ -179,28 +193,30 @@ class PlayState extends FlxState
 	{
 		var x:Int = Std.parseInt(entityData.get("x"));
 		var y:Int = Std.parseInt(entityData.get("y"));
-		var bat:Bats = new Bats(x,y,player,this);
+		var bat:Bats = new Bats(x,y,player);
 		enemyGroup.add(bat);		
 	}
 		private function enemy3Creator(entityName:String, entityData:Xml)//PIRANIAS
 	{
 		var x:Int = Std.parseInt(entityData.get("x"));
 		var y:Int = Std.parseInt(entityData.get("y"));
-		var pir:Pirania = new Pirania(x,y,player,this);
+		var pir:Pirania = new Pirania(x,y,player);
 		enemyGroup.add(pir);		
 	}
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		guia.x = player.x - 115;//guia camara
-		guia.y = player.y - 230;//guia camara
+		guia.x = player.x - 75;//guia camara
+		guia.y = player.y - 50;//guia camara
 		FlxG.collide(player, tileBase);
 		FlxG.collide(player, escalera);
 		FlxG.collide(player, randomFloor);
 		FlxG.collide(player, cajitas);
+		FlxG.collide(guia, border1);
+		FlxG.collide(guia, border2);
 		if (FlxG.collide(player, cintita))
 		{
-			player.velocity.x += 3;
+			player.x += 3;
 		}
 		if (FlxG.collide(player, fueguito))
 		{
@@ -208,17 +224,18 @@ class PlayState extends FlxState
 			player.x -= 5;
 			player.y -= 5;
 		}
-		//FlxG.collide(enemy, tileBase);
+		FlxG.collide(enemy, tileBase);
 		FlxG.collide(enemyGroup, tileBase);
-		//FlxG.collide(caja, tileBase);
+		FlxG.collide(caja, tileBase);
 		FlxG.collide(cajitas, tileBase);
+		FlxG.collide(cajitas, cajitas);
 		player.acceleration.y = Reg.gravedad;
 		player.acceleration.x = 0;
 		
-		//if (FlxG.overlap(player.woahHit, enemy))
-		//{
-			//enemy.kill();
-		//}
+		if (FlxG.overlap(player.woahHit, enemy))
+		{
+			enemy.kill();
+		}
 		if (FlxG.overlap(player, enemy))
 		{
 			player.recibirDanio(enemy.danio, enemy.x);
@@ -226,34 +243,37 @@ class PlayState extends FlxState
 		for (i in 0... enemyGroup.members.length)
 		{
 			var spoopy:Enemy = enemyGroup.members[i];
-			if (FlxG.overlap(player.woahHit, spoopy) && player.actionState == Estados.ATTACK)
+			if (FlxG.overlap(player, spoopy) && player.actionState == Estados.ATTACK)
 			{
 				if (spoopy.get_tieneEscudo())
 				{
 					if (spoopy.get_attackDirection() == "Right" && spoopy.x > player.x)
 					{
-						spoopy.drop();
 						enemyGroup.remove(spoopy, true);
 					}
 					else 
 					if (spoopy.get_attackDirection() == "Left" && spoopy.x < player.x)
 					{
-						spoopy.drop();
 						enemyGroup.remove(spoopy, true);
 					}
 				}
 				else
-				spoopy.drop();
 				enemyGroup.remove(spoopy, true);
 			}
 			if (FlxG.overlap(player, spoopy) && player.actionState != Estados.ATTACK)
 			{
-				player.recibirDanio(spoopy.danio,spoopy.x);
+				player.recibirDanio(enemy.danio, enemy.x);
 			}
 		}
 		if (FlxG.overlap(player, escaleritas) && (FlxG.keys.pressed.UP||FlxG.keys.pressed.DOWN))
 		{
 			player.trepar();
+		}
+		if (player.vida == 0)
+		{
+			trace("fuck");
+			var menuState:MenuState = new MenuState();
+			FlxG.switchState(menuState);
 		}
 	}
 }

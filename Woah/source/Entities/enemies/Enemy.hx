@@ -1,14 +1,10 @@
 package entities.enemies;
 
-import entities.Balas;
-import entities.Cura;
-import entities.Item;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxG;
 import entities.Player;
 import flixel.system.FlxSound;
-import flixel.math.FlxRandom;
 
 enum EstadosEnemy
 {
@@ -29,8 +25,7 @@ class Enemy extends FlxSprite
 	private var sonidoVez:Bool;
 	private var tieneEscudo(get, null):Bool;
 	private var attackDirection(get, null):String;
-	private var estado:PlayState;
-	public function new(?X:Float=0, ?Y:Float=0, player:Player, _estado:PlayState) 
+	public function new(?X:Float=0, ?Y:Float=0, player:Player) 
 	{
 		super(X, Y);
 		actionState = IDLE;
@@ -43,7 +38,6 @@ class Enemy extends FlxSprite
 		sonidoVez = true;
 		sonido.looped = true;
 		sonido.volume = 1;
-		estado = _estado;
 	}
 	
 	override public function update(elapsed:Float):Void 
@@ -76,24 +70,5 @@ class Enemy extends FlxSprite
 	public function get_attackDirection():String 
 	{
 		return attackDirection;
-	}
-	public function drop():Void
-	{
-		trace("si");
-		var r:FlxRandom = new FlxRandom();
-		var obj:Item;
-		switch (r.int(0,4)) 
-		{
-			case 0:
-				obj = new Cura(this.x, this.y, playerRef);
-				estado.add(obj);
-				trace("algo");
-			case 1:
-				obj = new Balas(this.x, this.y, playerRef);
-				estado.add(obj);
-				trace("algo");
-			default:
-				trace("algo");
-		}
 	}
 }
