@@ -234,7 +234,18 @@ class PlayState extends FlxState
 		
 		if (FlxG.overlap(player.woahHit, enemy))
 		{
-			enemy.kill();
+			if (enemy.get_tieneEscudo())
+				{
+					if (enemy.get_attackDirection() == "Right" && enemy.x > player.x)
+					{
+						enemy.kill();
+					}
+					else 
+					if (enemy.get_attackDirection() == "Left" && enemy.x < player.x)
+					{
+						enemy.kill();
+					}
+				}
 		}
 		if (FlxG.overlap(player, enemy))
 		{
