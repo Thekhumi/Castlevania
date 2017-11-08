@@ -18,7 +18,7 @@ class Disparo extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset, direc:Bool, ?angulo:Int=0) 
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(30, 5, 0xFFFFFFFF, false);
+		loadGraphic(AssetPaths.balin__png);
 		updateHitbox();
 		FlxG.sound.play(AssetPaths.disparo__ogg,0.5,false,true);
 		if (direc) 
