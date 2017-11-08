@@ -3,6 +3,7 @@ package;
 import entities.enemies.Bats;
 import entities.enemies.Enemy;
 import entities.enemies.EnemySkeleton;
+import entities.enemies.EnemySkeletonShield;
 import entities.Player;
 import tiles.Cinta;
 import tiles.Escaleras;
@@ -20,7 +21,7 @@ class PlayState extends FlxState
 
 {
 	private var player:Player;
-	private var enemy:EnemySkeleton;
+	private var enemy:EnemySkeletonShield;
 	private var guia:FlxSprite;
 	private var tileBase:FlxTilemap;
 	private var escalera:FlxTilemap;
@@ -76,7 +77,7 @@ class PlayState extends FlxState
 		loader.loadEntities(enemy2Creator, "Murcielago");
 		loader.loadEntities(enemy1Creator, "Esqueleto");
 		
-		enemy = new EnemySkeleton(400, 0, player);
+		enemy = new EnemySkeletonShield(400, 0, player);
 		enemy.width = 16;
 		enemy.height = 32;
 		enemy.offset.x = 8;
