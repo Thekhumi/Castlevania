@@ -13,6 +13,7 @@ class Metralleta extends Item
 	{
 		super(X, Y, SimpleGraphic, player);
 		loadGraphic(AssetPaths.metralleta__png);
+		updateHitbox();
 		tipo = Tipo.METRALLETA;
 	}
 	

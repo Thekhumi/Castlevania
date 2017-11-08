@@ -8,7 +8,7 @@ import Math;
 import flixel.FlxG;
 class Bats extends Enemy
 {
-
+	private var esperar:Float;
 	public function new(?X:Float=0, ?Y:Float=0, player:Player) 
 	{
 		super(X, Y, player);
@@ -21,17 +21,18 @@ class Bats extends Enemy
 		danio = 75;
 		velocity.y = 0;
 		acceleration.y = 0;
+		esperar = 0;
 		actionState = EstadosEnemy.IDLE;
 	}
 	
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
-		checkEstados();
+		checkEstados(elapsed);
 		movimientoEnemy1();
 	}
 	
-	function checkEstados() 
+	function checkEstados(elapsed:Float) 
 	{
 		switch(actionState)
 		{
@@ -45,9 +46,11 @@ class Bats extends Enemy
 		//RUN
 		case EstadosEnemy.RUN:
 			velocity.y = -100;
-			if ((velocity.x < 0 && (playerRef.x - this.x >=200)) || (velocity.x > 0 && (this.x - playerRef.x>=200))) 
+			esperar += elapsed;
+			if (esperar >= 2) 
 			{
 				actionState = EstadosEnemy.ATTACK;
+				esperar = 0;
 			}
 		//JUMP
 		case EstadosEnemy.JUMP:
@@ -63,10 +66,10 @@ class Bats extends Enemy
 				velocity.x = -100;
 			}
 			
-			if (playerRef.y >this.y) 
+			if (playerRef.y-(playerRef.height/2) >this.y) 
 			{
 				velocity.y = 100;
-			} else if (playerRef.y < this.y) 
+			} else if (playerRef.y-(playerRef.height/2) < this.y) 
 			{
 				velocity.y = -100;
 			} 

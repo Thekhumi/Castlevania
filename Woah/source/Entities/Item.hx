@@ -10,27 +10,26 @@ import flixel.FlxG;
  * @author ...
  */
 
- enum Tipo
- {
+enum Tipo
+{
 	NADA;
 	PISTOLA;
 	METRALLETA;
 	ESCOPETA;
 	BALAS;
 	CURA;
-	
- }
-class Item extends FlxSprite 
+
+}
+class Item extends FlxSprite
 {
 	private var tipo:Tipo;
 	private var jugador:Player;
-	
-	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset, player:Player) 
+
+	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset, player:Player)
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(15,15,0xFF00FFFF);
 		jugador = player;
-		
+		acceleration.y = Reg.gravedad;
 	}
 	override public function update(elapsed:Float):Void
 	{
@@ -38,18 +37,18 @@ class Item extends FlxSprite
 	}
 	private function pickUp(yo:Item, player:Player):Void
 	{
-		switch (tipo) 
+		if (FlxG.keys.justPressed.X)
 		{
-			case BALAS:
-				player.addMun(10);
-			case CURA:
-				player.curarse();
-			default:
-				if (FlxG.keys.justPressed.X) 
-				{
+			switch (tipo)
+			{
+				case BALAS:
+					player.addMun(10);
+				case CURA:
+					player.curarse();
+				default:
 					player.setArma(tipo);
-				}
+			}
+			this.destroy();
 		}
-		this.destroy();
 	}
 }

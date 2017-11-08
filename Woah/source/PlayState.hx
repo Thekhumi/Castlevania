@@ -1,5 +1,6 @@
 package;
 
+import entities.Caja;
 import entities.enemies.Bats;
 import entities.enemies.Enemy;
 import entities.enemies.EnemySkeleton;
@@ -32,6 +33,7 @@ class PlayState extends FlxState
 	private var enemyGroup:FlxTypedGroup<Enemy>;
 	private var randomFloor:FlxTypedGroup<RandomFloor>;
 	private var cintita:FlxTypedGroup<Cinta>;
+	private var caja:Caja;
 	override public function create():Void
 	{
 		super.create();
@@ -82,6 +84,8 @@ class PlayState extends FlxState
 		enemy.offset.x = 8;
 		enemy.offset.y = 6;
 		
+		caja = new Caja(100, 0, player, this);
+		
 		add(guia);
 		add(tileBase);
 		add(escaleritas);
@@ -92,6 +96,7 @@ class PlayState extends FlxState
 		
 		add(player);
 		add(enemy);
+		add(caja);
 		add(enemyGroup);
 		interfaz = new Interfaz(player, this);
 		add(interfaz);
@@ -151,7 +156,7 @@ class PlayState extends FlxState
 		FlxG.collide(player, randomFloor);
 		if (FlxG.collide(player, cintita))
 		{
-			player.x += 3;
+			player.velocity.x += 3;
 		}
 		if (FlxG.collide(player, fuego))
 		{
@@ -161,6 +166,7 @@ class PlayState extends FlxState
 		}
 		FlxG.collide(enemy, tileBase);
 		FlxG.collide(enemyGroup, tileBase);
+		FlxG.collide(caja, tileBase);
 		player.acceleration.y = Reg.gravedad;
 		player.acceleration.x = 0;
 		
