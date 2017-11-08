@@ -5,6 +5,8 @@ import entities.enemies.Bats;
 import entities.enemies.Enemy;
 import entities.enemies.EnemySkeleton;
 import entities.enemies.EnemySkeletonShield;
+import entities.enemies.Fire;
+import entities.enemies.Pirania;
 import entities.Player;
 import tiles.Cinta;
 import tiles.Escaleras;
@@ -35,12 +37,16 @@ class PlayState extends FlxState
 	private var randomFloor:FlxTypedGroup<RandomFloor>;
 	private var cintita:FlxTypedGroup<Cinta>;
 	private var caja:Caja;
+	private var fondo:FlxSprite;
+	private var fueguito:FlxTypedGroup<Fire>;
+	private var cajitas:FlxTypedGroup<Caja>;
 	override public function create():Void
 	{
 		super.create();
 		
 		FlxG.mouse.visible = false;
 		FlxG.camera.bgColor = 0xFF000000;
+		fondo = new FlxSprite(0, 0, AssetPaths.fondoBienPete__png);
 		
 		guia = new FlxSprite(0, 0);
 		guia.makeGraphic(256, 240);
@@ -49,6 +55,8 @@ class PlayState extends FlxState
 		escaleritas = new FlxTypedGroup<Escaleras>();
 		randomFloor = new FlxTypedGroup<RandomFloor>();
 		cintita = new FlxTypedGroup<Cinta>();
+		fueguito = new FlxTypedGroup<Fire>();
+		cajitas = new FlxTypedGroup<Caja>();
 		enemyGroup = new FlxTypedGroup<Enemy>();
 		
 		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.levelv3__oel);
@@ -76,8 +84,11 @@ class PlayState extends FlxState
 		loader.loadEntities(stairs, "Climb");
 		loader.loadEntities(Disap, "Disap");
 		loader.loadEntities(Wheel, "Slide");
+		loader.loadEntities(Faiah, "Fire");
+		loader.loadEntities(Boxes, "Caja");
 		loader.loadEntities(enemy2Creator, "Murcielago");
 		loader.loadEntities(enemy1Creator, "Esqueleto");
+		loader.loadEntities(enemy3Creator, "BadFish");
 		
 		enemy = new EnemySkeletonShield(400, 0, player);
 		enemy.width = 16;
@@ -87,13 +98,15 @@ class PlayState extends FlxState
 		
 		caja = new Caja(100, 0, player, this);
 		
-		add(guia);
-		add(tileBase);
 		add(escaleritas);
+		add(guia);
+		add(fondo);
+		add(tileBase);
 		add(escalera);
 		add(cintita);
 		add(randomFloor);
-		add(fuego);
+		add(fueguito);
+		add(cajitas);
 		
 		add(player);
 		add(enemy);
@@ -133,6 +146,22 @@ class PlayState extends FlxState
 		log.y = y;
 		cintita.add(log);
 	}
+		private function Faiah (entityName:String, entityData: Xml)//Fuego
+	{
+		var x:Int = Std.parseInt(entityData.get("x"));
+		var y:Int = Std.parseInt(entityData.get("y"));
+		var fir:Fire = new Fire();
+		fir.x = x;
+		fir.y = y;
+		fueguito.add(fir);
+	}
+	private function Boxes (entityName:String, entityData: Xml)//CAJAS
+	{
+		var x:Int = Std.parseInt(entityData.get("x"));
+		var y:Int = Std.parseInt(entityData.get("y"));
+		var box:Caja = new Caja(x,y,"",player, this);
+		cajitas.add(box);
+	}
 	private function enemy1Creator(entityName:String, entityData:Xml)//ESQUELETOS
 	{
 		var x:Int = Std.parseInt(entityData.get("x"));
@@ -148,6 +177,13 @@ class PlayState extends FlxState
 		var bat:Bats = new Bats(x,y,player);
 		enemyGroup.add(bat);		
 	}
+		private function enemy3Creator(entityName:String, entityData:Xml)//PIRANIAS
+	{
+		var x:Int = Std.parseInt(entityData.get("x"));
+		var y:Int = Std.parseInt(entityData.get("y"));
+		var pir:Pirania = new Pirania(x,y,player);
+		enemyGroup.add(pir);		
+	}
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
@@ -156,11 +192,12 @@ class PlayState extends FlxState
 		FlxG.collide(player, tileBase);
 		FlxG.collide(player, escalera);
 		FlxG.collide(player, randomFloor);
+		FlxG.collide(player, cajitas);
 		if (FlxG.collide(player, cintita))
 		{
 			player.velocity.x += 3;
 		}
-		if (FlxG.collide(player, fuego))
+		if (FlxG.collide(player, fueguito))
 		{
 			player.fueguin();
 			player.x -= 5;
@@ -169,6 +206,7 @@ class PlayState extends FlxState
 		FlxG.collide(enemy, tileBase);
 		FlxG.collide(enemyGroup, tileBase);
 		FlxG.collide(caja, tileBase);
+		FlxG.collide(cajitas, tileBase);
 		player.acceleration.y = Reg.gravedad;
 		player.acceleration.x = 0;
 		

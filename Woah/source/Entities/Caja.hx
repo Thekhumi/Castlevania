@@ -16,10 +16,13 @@ class Caja extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset, player:Player, state:PlayState) 
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(24, 24, 0xFFFFFFFF, false);
+		loadGraphic(AssetPaths.CTileset__png, true, 32, 32);
+		animation.add("box", [5], 1, true);
+		animation.play("box");
 		jugador = player;
 		estado = state;
 		updateHitbox;
+		this.immovable = true;
 		acceleration.y = Reg.gravedad;
 	}
 	override public function update(elapsed:Float):Void
