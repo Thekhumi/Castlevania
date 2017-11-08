@@ -22,7 +22,6 @@ class Caja extends FlxSprite
 		jugador = player;
 		estado = state;
 		updateHitbox;
-		this.immovable = true;
 		acceleration.y = Reg.gravedad;
 	}
 	override public function update(elapsed:Float):Void

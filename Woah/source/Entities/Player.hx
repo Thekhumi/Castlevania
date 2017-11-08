@@ -21,6 +21,7 @@ enum Estados
 class Player extends FlxSprite 
 {
 	public var atacc:FlxSprite;
+	public var woahHit(get, null):FlxSprite;
 	public var actionState(get, null):Estados;
 	private var vida:Float;
 	private var mun:Int;
@@ -37,16 +38,24 @@ class Player extends FlxSprite
 		animation.add("run", [4, 5, 6, 3], 8, true);
 		animation.add("jump", [7, 8], 8, false);
 		animation.add("fall", [9], 8, false);
-		animation.add("atacc", [10, 11, 12, 13, 14, 15, 16, 17], 12, false);
-		animation.add("ataccflip", [10, 11, 12, 13, 18, 19, 20, 21], 12, false);
+		animation.add("atacc", [11, 12, 13, 14, 15, 16, 17], 18, false);
+		animation.add("ataccflip", [11, 12, 13, 18, 19, 20, 21], 18, false);
 		animation.add("up", [22, 23], 6, true);
 		animation.add("damn", [24, 25, 24, 25, 24, 25], 8, false);
+		
+		this.width = 16;
+		this.height = 32;
+		this.offset.x = 36;
+		this.offset.y = 6;
 		
 		actionState = IDLE;
 		vida = Reg.playerVidaMax;
 		mun = 0;
 		arma = NADA;
 		
+		woahHit = new FlxSprite();
+		woahHit.makeGraphic(30,12, 0x00000000);
+		woahHit.kill();
 	}
 	
 	override public function update(elapsed:Float):Void 
@@ -65,6 +74,7 @@ class Player extends FlxSprite
 				animation.play("idle");
 				movimiento();
 				salto();
+				woahHit.kill();
 				if (velocity.y < 0)
 					actionState = Estados.JUMP;
 				else if (velocity.y > 0)
@@ -125,14 +135,28 @@ class Player extends FlxSprite
 				if (facing == FlxObject.LEFT)
 				{
 					animation.play("ataccflip");
-					if (animation.name == "ataccflip" && animation.curAnim.curFrame == 7)
+					if (animation.name == "ataccflip" && animation.curAnim.curFrame == 4)
+					{
+						woahHit.reset(this.x - 22, this.y + 15);
+					}
+					if (animation.name == "ataccflip" && animation.curAnim.curFrame == 6)
+					{
+						woahHit.reset(this.x - 29, this.y + 15);
 						actionState = Estados.IDLE;
+					}
 				}
 				else if (facing == FlxObject.RIGHT)
 				{
 					animation.play("atacc");
-					if (animation.name == "atacc" && animation.curAnim.curFrame == 7)
+					if (animation.name == "atacc" && animation.curAnim.curFrame == 3)
+					{	
+						woahHit.reset(this.x +10, this.y + 15);
+					}
+					if (animation.name == "atacc" && animation.curAnim.curFrame == 6)
+					{	
+						woahHit.reset(this.x +17, this.y + 15);
 						actionState = Estados.IDLE;
+					}
 				}
 			//CLIMB
 			case Estados.CLIMB:
@@ -203,6 +227,10 @@ class Player extends FlxSprite
 	function get_actionState():Estados 
 	{
 		return actionState;
+	}
+	function get_woahHit():FlxSprite 
+	{
+		return woahHit;
 	}
 	
 	public function addMun(cant:Int):Void

@@ -108,6 +108,7 @@ class PlayState extends FlxState
 		add(fueguito);
 		add(cajitas);
 		
+		add(player.woahHit);
 		add(player);
 		add(enemy);
 		add(caja);
@@ -210,7 +211,7 @@ class PlayState extends FlxState
 		player.acceleration.y = Reg.gravedad;
 		player.acceleration.x = 0;
 		
-		if (FlxG.overlap(player, enemy) && player.actionState== Estados.ATTACK)
+		if (FlxG.overlap(player.woahHit, enemy))
 		{
 			enemy.kill();
 		}
@@ -246,30 +247,6 @@ class PlayState extends FlxState
 		if (FlxG.overlap(player, escaleritas) && (FlxG.keys.pressed.UP||FlxG.keys.pressed.DOWN))
 		{
 			player.trepar();
-		}
-		if (player.actionState == Estados.ATTACK)//HITBOX DONT WORKS
-		{
-			if (player.animation.name == "atacc" && player.animation.curAnim.curFrame == 5)
-			{
-				player.width = 40;
-				player.height = 32;
-				player.offset.x = 36;
-				player.offset.y = 6;
-			}
-			if (player.animation.name == "atacc" && player.animation.curAnim.curFrame == 7)
-			{
-				player.width = 60;
-				player.height = 32;
-				player.offset.x = 36;
-				player.offset.y = 6;
-			}
-		}
-		if (player.actionState == Estados.IDLE)//HITBOX UPDATE
-		{
-			player.width = 16;
-			player.height = 32;
-			player.offset.x = 36;
-			player.offset.y = 6;
 		}
 	}
 }

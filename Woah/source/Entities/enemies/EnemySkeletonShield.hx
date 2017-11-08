@@ -14,7 +14,7 @@ class EnemySkeletonShield extends Enemy
 	public function new(?X:Float=0, ?Y:Float=0, player:Player) 
 	{
 		super(X, Y,player);
-		loadGraphic(AssetPaths.skeleton__png, true, 32, 38);
+		loadGraphic(AssetPaths.verySpookySkeleton__png, true, 32, 38);
 		updateHitbox();
 		tieneEscudo = true;
 		attackDirection = "Left";
