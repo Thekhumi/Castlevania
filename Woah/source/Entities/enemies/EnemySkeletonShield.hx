@@ -11,13 +11,14 @@ class EnemySkeletonShield extends Enemy
 {
 
 	private var timer:Float;
-	private var attackDirection:String;
 	public function new(?X:Float=0, ?Y:Float=0, player:Player) 
 	{
 		super(X, Y,player);
 		loadGraphic(AssetPaths.skeleton__png, true, 32, 38);
 		updateHitbox();
-		setFacingFlip(FlxObject.RIGHT, true, false);
+		tieneEscudo = true;
+		attackDirection = "Left";
+		setFacingFlip(FlxObject.RIGHT, true,false);
 		setFacingFlip(FlxObject.LEFT, false, false);
 		animation.add("chase", [0, 1, 2, 1], 8, true);
 		animation.play("chase");

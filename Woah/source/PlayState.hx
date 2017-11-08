@@ -222,10 +222,26 @@ class PlayState extends FlxState
 		{
 			var spoopy:Enemy = enemyGroup.members[i];
 			if (FlxG.overlap(player, spoopy) && player.actionState == Estados.ATTACK)
+			{
+				if (spoopy.get_tieneEscudo())
+				{
+					if (spoopy.get_attackDirection() == "Right" && spoopy.x > player.x)
+					{
+						enemyGroup.remove(spoopy, true);
+					}
+					else 
+					if (spoopy.get_attackDirection() == "Left" && spoopy.x < player.x)
+					{
+						enemyGroup.remove(spoopy, true);
+					}
+				}
+				else
 				enemyGroup.remove(spoopy, true);
-			
-			if (FlxG.overlap(player, spoopy)&& player.actionState != Estados.ATTACK)
+			}
+			if (FlxG.overlap(player, spoopy) && player.actionState != Estados.ATTACK)
+			{
 				player.recibirDanio(enemy.danio, enemy.x);
+			}
 		}
 		if (FlxG.overlap(player, escaleritas) && (FlxG.keys.pressed.UP||FlxG.keys.pressed.DOWN))
 		{

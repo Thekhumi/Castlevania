@@ -23,10 +23,14 @@ class Enemy extends FlxSprite
 	public var danio:Int;
 	private var sonido:FlxSound;
 	private var sonidoVez:Bool;
+	private var tieneEscudo(get, null):Bool;
+	private var attackDirection(get, null):String;
 	public function new(?X:Float=0, ?Y:Float=0, player:Player) 
 	{
 		super(X, Y);
 		actionState = IDLE;
+		attackDirection = null;
+		tieneEscudo = false;
 		vida = Reg.enemyVidaBase;
 		playerRef = player;
 		acceleration.y = Reg.gravedad;
@@ -56,5 +60,15 @@ class Enemy extends FlxSprite
 		{
 			sonido.fadeOut(5,0);
 		}
+	}
+	
+	public function get_tieneEscudo():Bool 
+	{
+		return tieneEscudo;
+	}
+	
+	public function get_attackDirection():String 
+	{
+		return attackDirection;
 	}
 }
