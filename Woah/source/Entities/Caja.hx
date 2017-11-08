@@ -5,6 +5,7 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.math.FlxRandom;
 import flixel.FlxG;
 import entities.Player.Estados;
+import entities.Balas;
 /**
  * ...
  * @author
@@ -22,7 +23,7 @@ class Caja extends FlxSprite
 		jugador = player;
 		estado = state;
 		updateHitbox;
-		this.immovable = true;
+		//this.immovable = true;
 		acceleration.y = Reg.gravedad;
 	}
 	override public function update(elapsed:Float):Void

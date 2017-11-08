@@ -6,6 +6,7 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxG;
 import flixel.FlxObject;
 import entities.Item;
+import haxe.Timer;
 
 enum Estados
 {
@@ -14,25 +15,28 @@ enum Estados
 	RUN;
 	FALLING;
 	ATTACK;
+	SHOOT;
 	CLIMB;
 	DAMAGE;
 }
 
-class Player extends FlxSprite 
+class Player extends FlxSprite
 {
 	public var atacc:FlxSprite;
 	public var actionState(get, null):Estados;
 	private var vida:Float;
 	private var mun:Int;
 	private var arma:Tipo;
-	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
+	private var estado:PlayState;
+	private var cooldown:Float;
+	public function new(?X:Float = 0, ?Y:Float = 0, ?SimpleGraphic:FlxGraphicAsset, _estado:PlayState)
 	{
 		super(X, Y, SimpleGraphic);
 		loadGraphic(AssetPaths.clone__png, true, 92, 38);
 		updateHitbox();
 		setFacingFlip(FlxObject.RIGHT, false, false);
 		setFacingFlip(FlxObject.LEFT, true, false);
-		
+
 		animation.add("idle", [0, 1, 2], 8, true);
 		animation.add("run", [4, 5, 6, 3], 8, true);
 		animation.add("jump", [7, 8], 8, false);
@@ -41,24 +45,37 @@ class Player extends FlxSprite
 		animation.add("ataccflip", [10, 11, 12, 13, 18, 19, 20, 21], 12, false);
 		animation.add("up", [22, 23], 6, true);
 		animation.add("damn", [24, 25, 24, 25, 24, 25], 8, false);
-		
+		estado = _estado;
 		actionState = IDLE;
 		vida = Reg.playerVidaMax;
 		mun = 0;
-		arma = NADA;
-		
+		cooldown = 0;
+		arma = Tipo.NADA;
 	}
-	
-	override public function update(elapsed:Float):Void 
+
+	override public function update(elapsed:Float):Void
 	{
 		checkEstados();
-		acceleration.y = Reg.gravedad; 
+		acceleration.y = Reg.gravedad;
 		super.update(elapsed);
+		if (cooldown < 1)
+		{
+			cooldown += elapsed;
+		}
+		else
+		{
+		}
+		//para testear
+		if (mun>=0 && mun <15)
+		{
+			mun++;
+		}
+		arma = Tipo.METRALLETA;
 	}
-	
+
 	private function checkEstados():Void
 	{
-		switch(actionState)
+		switch (actionState)
 		{
 			//IDLE
 			case Estados.IDLE:
@@ -75,6 +92,10 @@ class Player extends FlxSprite
 				{
 					actionState = Estados.ATTACK;
 					FlxG.sound.play(AssetPaths.woah__wav);
+				}
+				else if (FlxG.keys.justPressed.C)
+				{
+					actionState = Estados.SHOOT;
 				}
 				else if (velocity.x == 0)
 					actionState = Estados.IDLE;
@@ -95,6 +116,10 @@ class Player extends FlxSprite
 					velocity.x = 0;
 					FlxG.sound.play(AssetPaths.woah__wav);
 				}
+				else if (FlxG.keys.justPressed.C)
+				{
+					actionState = Estados.SHOOT;
+				}
 			//JUMP
 			case Estados.JUMP:
 				animation.play("jump");
@@ -105,6 +130,10 @@ class Player extends FlxSprite
 					actionState = Estados.ATTACK;
 					FlxG.sound.play(AssetPaths.woah__wav);
 				}
+				else if (FlxG.keys.justPressed.C)
+				{
+					actionState = Estados.SHOOT;
+				}
 			//FALLING
 			case Estados.FALLING:
 				animation.play("fall");
@@ -113,12 +142,16 @@ class Player extends FlxSprite
 					if (velocity.x == 0)
 						actionState = Estados.IDLE;
 					else
-					actionState = Estados.RUN;
+						actionState = Estados.RUN;
 				}
 				if (FlxG.keys.justPressed.Z)
 				{
 					actionState = Estados.ATTACK;
 					FlxG.sound.play(AssetPaths.woah__wav);
+				}
+				else if (FlxG.keys.justPressed.C)
+				{
+					actionState = Estados.SHOOT;
 				}
 			//ATTACK
 			case Estados.ATTACK:
@@ -134,6 +167,17 @@ class Player extends FlxSprite
 					if (animation.name == "atacc" && animation.curAnim.curFrame == 7)
 						actionState = Estados.IDLE;
 				}
+			//DISPARAR
+			case Estados.SHOOT:
+				if (arma != Tipo.NADA)
+				{
+					
+					disparar();
+				}
+				else
+				{
+					actionState = Estados.IDLE;
+				}
 			//CLIMB
 			case Estados.CLIMB:
 				animation.play("up");
@@ -145,29 +189,103 @@ class Player extends FlxSprite
 				velocity.y = -velocity.y;
 				animation.play("damn");
 				if (animation.name == "damn" && animation.curAnim.curFrame == 5)
-						actionState = Estados.IDLE;
+					actionState = Estados.IDLE;
 		}
 	}
-	
+	private function disparar():Void
+	{
+		if (mun > 0 && cooldown >= 1)
+		{
+			if (velocity.y == 0) 
+			{
+				velocity.x = 0;
+			}
+			var direc:Bool;
+			if (facing == FlxObject.RIGHT)
+			{
+				direc = true;
+			}
+			else
+			{
+				direc = false;
+			}
+			switch (arma)
+			{
+				case Tipo.PISTOLA:
+					unDisparo(direc);
+					cooldown = 0;
+					actionState = Estados.IDLE;
+				case Tipo.METRALLETA:
+					if (mun >=3)
+					{
+						var reloj:Timer = new Timer(100);
+						var contador:Int = 0;
+						reloj.run = function()
+						{
+							unDisparo(direc);
+							contador++;
+							if (contador >= 3)
+							{
+								reloj.stop();
+							}
+						}
+					}
+					else
+					{
+						FlxG.sound.play(AssetPaths.sinBalas__ogg,1,false,true);
+					}
+					cooldown = 0;
+					actionState = Estados.IDLE;
+				case Tipo.ESCOPETA:
+					if (mun >=5)
+					{
+						unDisparo(direc, 8);
+						unDisparo(direc, 4);
+						unDisparo(direc, 0);
+						unDisparo(direc, -4);
+						unDisparo(direc, -8);
+					}
+					else
+					{
+						FlxG.sound.play(AssetPaths.sinBalas__ogg,1,false,true);
+					}
+					cooldown = 0;
+					actionState = Estados.IDLE;
+				default:
+			}
+		}
+		if (mun<=0)
+		{
+			FlxG.sound.play(AssetPaths.sinBalas__ogg, 1, false, true);
+			actionState = Estados.IDLE;
+		}
+	}
+	private function unDisparo(direc:Bool,?angulo:Int):Void
+	{
+		var tiro:Disparo = new Disparo(this.x + (this.width/2), this.y + (this.height/2), direc, angulo);
+		estado.add(tiro);
+		mun--;
+
+	}
 	private function movimiento():Void
 	{
-	velocity.x = 0;
-	if (FlxG.keys.pressed.RIGHT)
-		velocity.x += 150; 
-	if (FlxG.keys.pressed.LEFT)
-		velocity.x -= 150;
-		
-	if (velocity.x < 0)
-		facing = FlxObject.LEFT;
-	if (velocity.x > 0)
-		facing = FlxObject.RIGHT;
+		velocity.x = 0;
+		if (FlxG.keys.pressed.RIGHT)
+			velocity.x += 150;
+		if (FlxG.keys.pressed.LEFT)
+			velocity.x -= 150;
+
+		if (velocity.x < 0)
+			facing = FlxObject.LEFT;
+		if (velocity.x > 0)
+			facing = FlxObject.RIGHT;
 	}
-	
+
 	public function recibirDanio(?cantidad:Int, ?xFuente:Float):Void
 	{
 		actionState = Estados.DAMAGE;
 		vida -= cantidad;
-		
+
 		if (this.x > xFuente)
 		{
 			x +=  25;
@@ -184,7 +302,7 @@ class Player extends FlxSprite
 		actionState = Estados.DAMAGE;
 		vida -= 75;
 	}
-	
+
 	public function trepar():Void
 	{
 		actionState = Estados.CLIMB;
@@ -193,18 +311,18 @@ class Player extends FlxSprite
 		if (FlxG.keys.pressed.DOWN)
 			this.y += 5;
 	}
-	
+
 	private function salto():Void
 	{
 		if (FlxG.keys.justPressed.SPACE)
 			velocity.y -= 350;
 	}
-	
-	function get_actionState():Estados 
+
+	function get_actionState():Estados
 	{
 		return actionState;
 	}
-	
+
 	public function addMun(cant:Int):Void
 	{
 		mun += cant;
