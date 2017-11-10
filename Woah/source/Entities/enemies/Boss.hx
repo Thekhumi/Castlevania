@@ -96,16 +96,16 @@ class Boss extends FlxSprite
 				{	
 					animation.stop();
 					animation.play("beam");
-					this.acceleration.x = 75;
-					if (this.x == 5120)
-					{
-						this.acceleration.x = -140;
-						if (this.x == 4100)
-						{
-							this.acceleration.x = 0;
-							setEstados();
-						}
-					}
+					//this.acceleration.x = 75;
+					//if (this.x == 5120)
+					//{
+						//this.acceleration.x = -140;
+						//if (this.x == 4100)
+						//{
+							//this.acceleration.x = 0;
+							//setEstados();
+						//}
+					//}
 				}
 		}
 	}

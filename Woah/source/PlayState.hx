@@ -76,7 +76,7 @@ class PlayState extends FlxState
 		tileBase.setTileProperties(4, FlxObject.NONE);	//AGUA
 		tileBase.setTileProperties(5, FlxObject.ANY);	//SUELO3
 		escalera = loader.loadTilemap(AssetPaths.Stairs__png, 32, 32, "Escaleras"); 
-		escalera.setTileProperties(3, FlxObject.UP);	//ESCALERAS
+		escalera.setTileProperties(3, FlxObject.NONE);	//ESCALERAS
 		cinta = loader.loadTilemap(AssetPaths.tilesC__png, 32, 32, "Cinta"); 
 		cinta.setTileProperties(0, FlxObject.NONE);	//NADA
 		cinta.setTileProperties(6, FlxObject.ANY);	//CINTA
@@ -101,6 +101,7 @@ class PlayState extends FlxState
 		loader.loadEntities(enemy2Creator, "Murcielago");
 		loader.loadEntities(enemy1Creator, "Esqueleto");
 		loader.loadEntities(enemy3Creator, "BadFish");
+		loader.loadEntities(enemy4Creator, "EsqueleShield");
 		
 		Disparo.setEnemigo(enemyGroup);
 		Disparo.setTerreno(tileBase);
@@ -215,11 +216,18 @@ class PlayState extends FlxState
 		var pir:Pirania = new Pirania(x,y,player,this);
 		enemyGroup.add(pir);		
 	}
+		private function enemy4Creator(entityName:String, entityData:Xml)//ESQUELETOSESCUDO
+	{
+		var x:Int = Std.parseInt(entityData.get("x"));
+		var y:Int = Std.parseInt(entityData.get("y"));
+		var esqS:EnemySkeletonShield = new EnemySkeletonShield(x,y-32,player,this);
+		enemyGroup.add(esqS);		
+	}
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
 		guia.x = player.x - posicionGuia;//guia camara
-		guia.y = player.y - 235;//guia camara
+		guia.y = player.y - 200;//guia camara
 		if (FlxG.keys.pressed.LEFT)
 		{
 			limiteGuia = 175;

@@ -22,6 +22,7 @@ enum Estados
 
 class Player extends FlxSprite
 {
+	private var escalando:Bool;
 	public var atacc:FlxSprite;
 	public var woahHit(get, null):FlxSprite;
 	public var actionState(get, null):Estados;
@@ -66,13 +67,21 @@ class Player extends FlxSprite
 		woahHit.kill();
 		cooldown = 0;
 		arma = Tipo.NADA;
+		escalando = false;
 	}
 
 	override public function update(elapsed:Float):Void
 	{
 		checkEstados();
-		acceleration.y = Reg.gravedad;
+		if (!escalando) 
+		{
+			acceleration.y = Reg.gravedad;
+		}
 		super.update(elapsed);
+		if (vida > 1000)
+		{
+			vida = 1000;
+		}
 		if (cooldown < 1)
 		{
 			cooldown += elapsed;
@@ -359,11 +368,21 @@ class Player extends FlxSprite
 	public function trepar():Void
 	{
 		actionState = Estados.CLIMB;
-		if (FlxG.keys.pressed.UP)
-			this.y -= 5;
-		if (FlxG.keys.pressed.DOWN)
-			this.y += 5;
-	}
+		if (FlxG.keys.pressed.UP){
+			velocity.y = -80;
+			acceleration.y = 0;
+			escalando = true;
+		}
+		if (FlxG.keys.pressed.DOWN){
+			velocity.y = 80;
+			acceleration.y = 0;
+			escalando = true;
+		}
+		if (!FlxG.keys.pressed.UP && !FlxG.keys.pressed.DOWN) 
+		{
+			escalando = false;
+		}
+	}	
 
 	private function salto():Void
 	{
