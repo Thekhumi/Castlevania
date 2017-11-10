@@ -31,6 +31,7 @@ class Player extends FlxSprite
 	private var estado:PlayState;
 	private var cooldown:Float;
 	private var vulnerable:Bool;
+	private var reloj:Timer;
 	public function new(?X:Float = 0, ?Y:Float = 0, ?SimpleGraphic:FlxGraphicAsset, _estado:PlayState)
 	{
 		super(X, Y, SimpleGraphic);
@@ -53,6 +54,7 @@ class Player extends FlxSprite
 		this.offset.x = 36;
 		this.offset.y = 6;
 
+		
 		estado = _estado;
 		actionState = IDLE;
 		vida = Reg.playerVidaMax;
@@ -313,8 +315,8 @@ class Player extends FlxSprite
 			actionState = Estados.DAMAGE;
 			vida -= cantidad;
 			vulnerable = false;
-			var reloj:Timer = new Timer(300);
 			var contador:Int = 0;
+			reloj = new Timer(300);
 			if (this.x > xFuente)
 			{
 				velocity.x = 200;
@@ -327,11 +329,14 @@ class Player extends FlxSprite
 			{
 				visible = !visible;
 				contador++;
-				if (contador >=4)
+				if (contador>=4) 
+				{
+					velocity.x = 0;
+				}
+				if (contador >=8)
 				{
 					vulnerable = true;
 					visible = true;
-					velocity.x = 0;
 					reloj.stop();
 				}
 				
@@ -397,6 +402,7 @@ class Player extends FlxSprite
 	}
 	private function muerte():Void
 	{
+		reloj.stop();
 		var gameover:Gameover = new Gameover();
 		FlxG.switchState(gameover);
 	}
