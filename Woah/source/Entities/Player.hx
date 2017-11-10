@@ -47,12 +47,12 @@ class Player extends FlxSprite
 		animation.add("ataccflip", [11, 12, 13, 18, 19, 20, 21], 18, false);
 		animation.add("up", [22, 23], 6, true);
 		animation.add("damn", [24, 25, 24, 25, 24, 25], 8, false);
-		
+
 		this.width = 16;
 		this.height = 32;
 		this.offset.x = 36;
 		this.offset.y = 6;
-		
+
 		estado = _estado;
 		actionState = IDLE;
 		vida = Reg.playerVidaMax;
@@ -75,7 +75,7 @@ class Player extends FlxSprite
 		{
 			cooldown += elapsed;
 		}
-		if (vida <=0) 
+		if (vida <=0)
 		{
 			muerte();
 		}
@@ -181,11 +181,11 @@ class Player extends FlxSprite
 				{
 					animation.play("atacc");
 					if (animation.name == "atacc" && animation.curAnim.curFrame == 3)
-					{	
+					{
 						woahHit.reset(this.x +10, this.y + 15);
 					}
 					if (animation.name == "atacc" && animation.curAnim.curFrame == 6)
-					{	
+					{
 						woahHit.reset(this.x +17, this.y + 15);
 						actionState = Estados.IDLE;
 					}
@@ -194,7 +194,6 @@ class Player extends FlxSprite
 			case Estados.SHOOT:
 				if (arma != Tipo.NADA)
 				{
-					
 					disparar();
 				}
 				else
@@ -215,8 +214,8 @@ class Player extends FlxSprite
 					actionState = Estados.IDLE;
 			//DAMAGE
 			case Estados.DAMAGE:
-				velocity.x = -velocity.x;
-				velocity.y = -velocity.y;
+				//velocity.x = -velocity.x;
+				//velocity.y = -velocity.y;
 				animation.play("damn");
 				if (animation.name == "damn" && animation.curAnim.curFrame == 5)
 					actionState = Estados.IDLE;
@@ -309,27 +308,37 @@ class Player extends FlxSprite
 
 	public function recibirDanio(?cantidad:Int, ?xFuente:Float):Void
 	{
-		actionState = Estados.DAMAGE;
-		vida -= cantidad;
-		vulnerable = false;
-		var reloj:Timer = new Timer(300);
-		var contador:Int = 0;
-		reloj.run = function ()
+		if (vulnerable && vida > 0)
 		{
-			visible = !visible;
-			contador++;
-			if (contador >=4) 
+			actionState = Estados.DAMAGE;
+			vida -= cantidad;
+			vulnerable = false;
+			var reloj:Timer = new Timer(300);
+			var contador:Int = 0;
+			if (this.x > xFuente)
 			{
-				vulnerable = true;
-				reloj.stop();
+				velocity.x = 200;
+			}
+			else
+			{
+				velocity.x = -200;
+			}
+			reloj.run = function ()
+			{
+				visible = !visible;
+				contador++;
+				if (contador >=4)
+				{
+					vulnerable = true;
+					visible = true;
+					velocity.x = 0;
+					reloj.stop();
+				}
+				
 			}
 		}
-		if (this.x > xFuente)
-		{
-			x +=  25;
-		}
-		else x -= 25;
 	}
+	
 	public function curarse():Void
 	{
 		vida += 100;
@@ -338,6 +347,7 @@ class Player extends FlxSprite
 	{
 		FlxG.sound.play(AssetPaths.quemadura__ogg,1,false,true);
 		actionState = Estados.DAMAGE;
+		velocity.y = -200:
 		vida -= 75;
 	}
 
@@ -360,11 +370,11 @@ class Player extends FlxSprite
 	{
 		return actionState;
 	}
-	function get_woahHit():FlxSprite 
+	function get_woahHit():FlxSprite
 	{
 		return woahHit;
 	}
-	
+
 	public function addMun(cant:Int):Void
 	{
 		mun += cant;
