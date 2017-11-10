@@ -347,7 +347,7 @@ class Player extends FlxSprite
 	{
 		FlxG.sound.play(AssetPaths.quemadura__ogg,1,false,true);
 		actionState = Estados.DAMAGE;
-		velocity.y = -200:
+		velocity.y = -200;
 		vida -= 75;
 	}
 

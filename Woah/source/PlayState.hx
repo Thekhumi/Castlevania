@@ -43,6 +43,8 @@ class PlayState extends FlxState
 	private var fueguito:FlxTypedGroup<Fire>;
 	private var cajitas:FlxTypedGroup<Caja>;
 	private var watery:FlxTypedGroup<Water>;
+	private var posicionGuia:Int;
+	private var limiteGuia:Int;
 	override public function create():Void
 	{
 		super.create();
@@ -126,6 +128,8 @@ class PlayState extends FlxState
 		//add(caja);
 		add(enemyGroup);
 		interfaz = new Interfaz(player, this);
+		posicionGuia = 100;
+		limiteGuia = 100;
 		add(interfaz);
 		
 		FlxG.camera.follow(guia);
@@ -209,8 +213,20 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		guia.x = player.x - 75;//guia camara
+		guia.x = player.x - posicionGuia;//guia camara
 		guia.y = player.y - 235;//guia camara
+		if (FlxG.keys.pressed.LEFT)
+		{
+			limiteGuia = 175;
+			if(posicionGuia < limiteGuia)
+			posicionGuia += 1; 
+		}
+		if (FlxG.keys.pressed.RIGHT)
+		{
+			limiteGuia = 100;
+			if(posicionGuia > limiteGuia)
+			posicionGuia -= 1; 
+		}
 		FlxG.collide(player, tileBase);
 		FlxG.collide(player, escalera);
 		FlxG.collide(player, randomFloor);
