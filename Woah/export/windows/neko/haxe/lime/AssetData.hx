@@ -36,8 +36,12 @@ class AssetData {
 			type.set ("assets/images/balin.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/bat.png", "assets/images/bat.png");
 			type.set ("assets/images/bat.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/beam.png", "assets/images/beam.png");
+			type.set ("assets/images/beam.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/bloqueR.png", "assets/images/bloqueR.png");
 			type.set ("assets/images/bloqueR.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/BOSS.png", "assets/images/BOSS.png");
+			type.set ("assets/images/BOSS.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/C Damage.png", "assets/images/C Damage.png");
 			type.set ("assets/images/C Damage.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/CFULLclone.png", "assets/images/CFULLclone.png");
@@ -80,6 +84,8 @@ class AssetData {
 			type.set ("assets/images/TilesPetes.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/verySpookySkeleton.png", "assets/images/verySpookySkeleton.png");
 			type.set ("assets/images/verySpookySkeleton.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/watery.png", "assets/images/watery.png");
+			type.set ("assets/images/watery.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/wheel.png", "assets/images/wheel.png");
 			type.set ("assets/images/wheel.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/music/Spooky.ogg", "assets/music/Spooky.ogg");

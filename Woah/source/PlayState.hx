@@ -2,6 +2,7 @@ package;
 
 import entities.Caja;
 import entities.enemies.Bats;
+import entities.enemies.Boss;
 import entities.enemies.Enemy;
 import entities.enemies.EnemySkeleton;
 import entities.enemies.EnemySkeletonShield;
@@ -45,6 +46,7 @@ class PlayState extends FlxState
 	private var watery:FlxTypedGroup<Water>;
 	private var posicionGuia:Int;
 	private var limiteGuia:Int;
+	private var boss:Boss;
 	override public function create():Void
 	{
 		super.create();
@@ -88,7 +90,7 @@ class PlayState extends FlxState
 		FlxG.worldBounds.set(0, 0, 7680, 2250);
 		
 		FlxG.camera.setScrollBounds(0, tileBase.width, 0, tileBase.height);
-		player = new Player(120, 120, this);
+		player = new Player(69, 98, this);
 		
 		loader.loadEntities(stairs, "Climb");
 		loader.loadEntities(Disap, "Disap");
@@ -109,6 +111,7 @@ class PlayState extends FlxState
 		enemy.offset.x = 8;
 		enemy.offset.y = 6;
 		
+		boss = new Boss(4480, 864);
 		//caja = new Caja(100, 0, player, this);
 		
 		add(escaleritas);
@@ -127,6 +130,8 @@ class PlayState extends FlxState
 		add(enemy);
 		//add(caja);
 		add(enemyGroup);
+		add(boss);
+		add(boss.beam);
 		interfaz = new Interfaz(player, this);
 		posicionGuia = 100;
 		limiteGuia = 100;
@@ -233,7 +238,7 @@ class PlayState extends FlxState
 		FlxG.collide(player, cajitas);
 		if (FlxG.collide(player, cintita))
 		{
-			player.x += 3;
+			player.x += 2;
 		}
 		if (FlxG.collide(player, fueguito))
 		{
@@ -302,6 +307,7 @@ class PlayState extends FlxState
 		}
 		if (FlxG.overlap(player, watery))
 		{
+			player.recibirDanio(25, 1200);
 			player.x = 1024;
 			player.y = 1088;
 		}
